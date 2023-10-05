@@ -7,20 +7,19 @@ using namespace std;
 class Bitacora {
    public:
     // Constructor para crear una Bitacora vacia
-    Bitacora(const vector<string> campos, const string campo_clave);
+    Bitacora(vector<string> campos, string campo_clave);
 
     // Carga un registro individual a la Bitacora
-    void CargaIndividual(const vector<string> registro);
+    void CargaIndividual(vector<string> registro);
 
     // Carga varios registros desde un archivo
-    void CargaLotes(const string nombreArchivo);
+    void CargaLotes(string nombreArchivo);
 
     // Ordena la Bitacora por un campo clave
-    void Ordena(const string& campoClave);
+    void Ordena(string campoClave);
 
     // Consulta registros en la Bitacora dentro de un rango
-    vector<vector<string>> Consulta(const string& campoClave,
-                                    const string& desde, const string& hasta);
+    vector<vector<string>> Consulta(string campoClave, string desde, string hasta);
 
     // Limpia la Bitacora
     void Limpiar();

@@ -7,7 +7,7 @@
 using namespace std;
 
 // Constructor para crear una Bitacora vacaa
-Bitacora::Bitacora(const vector<string> campos, const string campo_clave) {
+Bitacora::Bitacora(vector<string> campos, string campo_clave) {
     this->campo_clave = campo_clave;
     this->campos = campos;
     for (int i = 0; i < campos.size() - 1; i++) {
@@ -18,14 +18,14 @@ Bitacora::Bitacora(const vector<string> campos, const string campo_clave) {
 }
 
 // Carga un registro individual a la Bitacora
-void Bitacora::CargaIndividual(const vector<string> registro) {
+void Bitacora::CargaIndividual(vector<string> registro) {
     for (int i = 0; i < registro.size() - 1; i++) {
         bitacora[i].push_back(registro[i]);
     }
 }
 
 // TODO Carga varios registros desde un archivo
-void Bitacora::CargaLotes(const string nombreArchivo) {
+void Bitacora::CargaLotes(string nombreArchivo) {
     ifstream archivo(nombreArchivo);
     string linea;
 
@@ -51,19 +51,16 @@ void Bitacora::CargaLotes(const string nombreArchivo) {
 }
 
 // TODO Ordena la Bitacora por un campo clave
-void Bitacora::Ordena(const string &campoClave) {
+void Bitacora::Ordena(string campoClave) {
     // Implementa aqui la logica de ordenacion de registros por el campo clave
 }
 
 // TODO Consulta registros en la Bitacora dentro de un rango
-vector<vector<string>> Bitacora::Consulta(const string &campoClave,
-                                          const string &desde,
-                                          const string &hasta) {
+vector<vector<string>> Bitacora::Consulta(string campoClave, string desde, string hasta) {
     vector<vector<string>> resultados;
-    // Implementa aqui la logica de consulta utilizando campoClave, desde y
-    // hasta
+    // Implementa aqui la logica de consulta utilizando campoClave, desde y hasta
     return resultados;
 }
 
-// Limpia la Bit�cora
+// Limpia la Biticora
 void Bitacora::Limpiar() { bitacora.clear(); }
