@@ -19,7 +19,8 @@ class Bitacora {
     void Ordena(string campoClave);
 
     // Consulta registros en la Bitacora dentro de un rango
-    vector<vector<string>> Consulta(string campoClave, string desde, string hasta);
+    vector<vector<string>> Consulta(string campoClave, string desde,
+                                    string hasta);
 
     // Limpia la Bitacora
     void Limpiar();
@@ -29,4 +30,7 @@ class Bitacora {
     int campo_clave_index;
     vector<string> campos;
     vector<vector<string>> bitacora;
+
+    // Constantes
+    int INDEX_ANTES_DE_ESPACIO_ANTES_DE_TEXTO = 32;
 };

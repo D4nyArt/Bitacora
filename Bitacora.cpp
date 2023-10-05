@@ -24,26 +24,33 @@ void Bitacora::CargaIndividual(vector<string> registro) {
     }
 }
 
-// TODO Carga varios registros desde un archivo
+// Carga varios registros desde un archivo
 void Bitacora::CargaLotes(string nombreArchivo) {
     ifstream archivo(nombreArchivo);
     string linea;
 
     while (getline(archivo, linea)) {
-        // Implementa aqui la logica para separar los campos de la linea y
         int reference_end = -1;
 
         for (int i = 0; i < linea.size() - 1; i++) {
             vector<string> *registro = new vector<string>();
             int reference_start = reference_end + 1;
-            if (linea[i] == ' ') {
-                int reference_end = i;
-                int linea_longitud = reference_end - reference_start;
-                registro->push_back(
-                    linea.substr(reference_start, linea_longitud));
+            if (i == INDEX_ANTES_DE_ESPACIO_ANTES_DE_TEXTO) {
+                registro->push_back(linea.substr(reference_start + 1));
                 CargaIndividual(*registro);
                 delete registro;
+                break;
+            } else {
+                if (linea[i] == ' ') {
+                    int reference_end = i;
+                    int linea_longitud = reference_end - reference_start;
+                    registro->push_back(
+                        linea.substr(reference_start, linea_longitud));
+                    CargaIndividual(*registro);
+                    delete registro;
+                }
             }
+            i++;
         }
     }
 
@@ -56,9 +63,11 @@ void Bitacora::Ordena(string campoClave) {
 }
 
 // TODO Consulta registros en la Bitacora dentro de un rango
-vector<vector<string>> Bitacora::Consulta(string campoClave, string desde, string hasta) {
+vector<vector<string>> Bitacora::Consulta(string campoClave, string desde,
+                                          string hasta) {
     vector<vector<string>> resultados;
-    // Implementa aqui la logica de consulta utilizando campoClave, desde y hasta
+    // Implementa aqui la logica de consulta utilizando campoClave, desde y
+    // hasta
     return resultados;
 }
 
