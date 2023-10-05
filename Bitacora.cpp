@@ -23,7 +23,7 @@ void Bitacora::CargaIndividual(const vector<string> registro) {
     }
 }
 
-// Carga varios registros desde un archivo
+// TODO Carga varios registros desde un archivo
 void Bitacora::CargaLotes(const string nombreArchivo) {
     ifstream archivo(nombreArchivo);
     string linea;
@@ -46,12 +46,12 @@ void Bitacora::CargaLotes(const string nombreArchivo) {
     archivo.close();
 }
 
-// Ordena la Bitacora por un campo clave
+// TODO Ordena la Bitacora por un campo clave
 void Bitacora::Ordena(const string &campoClave) {
     // Implementa aqui la logica de ordenacion de registros por el campo clave
 }
 
-// Consulta registros en la Bitacora dentro de un rango
+// TODO Consulta registros en la Bitacora dentro de un rango
 vector<vector<string>> Bitacora::Consulta(const string &campoClave,
                                           const string &desde,
                                           const string &hasta) {
