@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -29,18 +30,21 @@ void Bitacora::CargaLotes(const string nombreArchivo) {
     string linea;
 
     while (getline(archivo, linea)) {
-        vector<string> registro;
         // Implementa aqui la logica para separar los campos de la linea y
         int reference_end = -1;
 
-        for (int i = 0; i < campos.size() - 1; i++) {
-            int reference_start = reference_end - 1;
-            if (campos[i] == " ") {
+        for (int i = 0; i < linea.size() - 1; i++) {
+            vector<string> *registro = new vector<string>();
+            int reference_start = reference_end + 1;
+            if (linea[i] == ' ') {
                 int reference_end = i;
+                int linea_longitud = reference_end - reference_start;
+                registro->push_back(
+                    linea.substr(reference_start, linea_longitud));
+                CargaIndividual(*registro);
+                delete registro;
             }
         }
-        // llenar el registro
-        bitacora.push_back(registro);
     }
 
     archivo.close();
