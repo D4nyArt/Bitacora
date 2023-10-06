@@ -33,13 +33,14 @@ void Bitacora::CargaLotes(string nombreArchivo) {
         int reference_end = -1;
 
         for (int i = 0; i < linea.size() - 1; i++) {
-            vector<string> *registro = new vector<string>();
+            vector<string>* registro = new vector<string>();
             int reference_start = reference_end + 1;
             if (i == INDEX_ANTES_DE_ESPACIO_ANTES_DE_TEXTO) {
                 registro->push_back(linea.substr(reference_start + 1));
                 CargaIndividual(*registro);
                 delete registro;
-                break;
+                break;  // segun paletta, no podemos usar ni brake ni continue,
+                        // pero pues le preguntamos el lunes
             } else {
                 if (linea[i] == ' ') {
                     int reference_end = i;
@@ -58,8 +59,13 @@ void Bitacora::CargaLotes(string nombreArchivo) {
 }
 
 // TODO Ordena la Bitacora por un campo clave
-void Bitacora::Ordena(string campoClave) {
-    // Implementa aqui la logica de ordenacion de registros por el campo clave
+bool Bitacora::Ordena(string campoClave) {
+    // El campo clave ya lo tenemos desde el constructor, segun yo no es
+    // necesario recibirlo como parametro en esta funcion, es necesario
+    // revisarlo
+
+    ofstream bitacora_ordenada("bitacora_ordenada.txt");
+    bitacora_ordenada << "my text here!" << endl;
 }
 
 // TODO Consulta registros en la Bitacora dentro de un rango
@@ -69,6 +75,30 @@ vector<vector<string>> Bitacora::Consulta(string campoClave, string desde,
     // Implementa aqui la logica de consulta utilizando campoClave, desde y
     // hasta
     return resultados;
+}
+
+int partition(std::vector<int>& arr, int low, int high) {
+    int pivot = arr[high];
+    int i = (low - 1);
+
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
+// Quicksort function
+vector<string> quickSort(vector<int> arr, int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+    return arr;
 }
 
 // Limpia la Biticora
