@@ -92,12 +92,16 @@ int partition(std::vector<int>& arr, int low, int high) {
 
 // Quicksort function
 vector<string> quickSort(vector<int> arr, int low, int high) {
+    vector<string> arrs;
     if (low < high) {
         int pi = partition(arr, low, high);
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }
-    return arr;
+    for(int i=0; i<arr.size(); i++){
+        arrs.push_back(to_string(arr[i]));
+    }
+    return arrs;
 }
 
 // Limpia la Biticora
