@@ -6,7 +6,7 @@
 
 using namespace std;
 
-// Constructor para crear una Bitacora vacaa
+// Constructor para crear una Bitacora vacia
 Bitacora::Bitacora(vector<string> campos, string campo_clave) {
     this->campo_clave = campo_clave;
     this->campos = campos;
@@ -16,6 +16,10 @@ Bitacora::Bitacora(vector<string> campos, string campo_clave) {
         }
     }
 }
+
+//Destructor de Bitacora
+Bitacora::~Bitacora(){
+};
 
 // Carga un registro individual a la Bitacora
 void Bitacora::CargaIndividual(vector<string> registro) {
@@ -59,7 +63,7 @@ void Bitacora::CargaLotes(string nombreArchivo) {
 }
 
 // TODO Ordena la Bitacora por un campo clave
-bool Bitacora::Ordena(string campoClave) {
+bool Bitacora::Ordena(string campoClave, string nombreOrdenamiento) {
     // El campo clave ya lo tenemos desde el constructor, segun yo no es
     // necesario recibirlo como parametro en esta funcion, es necesario
     // revisarlo
