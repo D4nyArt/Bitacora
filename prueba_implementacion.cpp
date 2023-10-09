@@ -25,7 +25,7 @@ int main(int argc, char const *argv[]) {
     string hasta;
     cout << "Introduzca la fecha inicial de la consulta: ";
     cin >> desde; 
-    cout << "Introduzca la fecha inicial de la consulta: ";  
+    cout << "Introduzca la fecha final de la consulta: ";  
     cin >> hasta;  
     showConsultaResult(BC.Consulta("Mes", desde, hasta));
     //Bitacora failed_logins();
