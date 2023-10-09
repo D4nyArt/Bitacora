@@ -32,6 +32,7 @@ void Bitacora::CargaIndividual(vector<string> registro) {
 void Bitacora::CargaLotes(string nombreArchivo) {
     ifstream archivo(nombreArchivo);
     string linea;
+    bool seguir=true;
 
     while (getline(archivo, linea)) {
         int reference_end = -1;
@@ -43,8 +44,7 @@ void Bitacora::CargaLotes(string nombreArchivo) {
                 registro->push_back(linea.substr(reference_start + 1));
                 CargaIndividual(*registro);
                 delete registro;
-                break;  // segun paletta, no podemos usar ni brake ni continue,
-                        // pero pues le preguntamos el lunes
+                seguir=false;
             } else {
                 if (linea[i] == ' ') {
                     int reference_end = i;
