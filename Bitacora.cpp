@@ -29,7 +29,7 @@ void Bitacora::CargaIndividual(vector<string> registro) {
 }
 
 // Carga varios registros desde un archivo
-vector<string> Bitacora::CargaLotes(string nombreArchivo) {
+void Bitacora::CargaLotes(string nombreArchivo) {
     /* ifstream archivo(nombreArchivo);
     string linea;
     bool seguir=true;
