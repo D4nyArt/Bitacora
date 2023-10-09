@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <fstream>
+#include <sstream>
 #include <string>
 
 using namespace std;
@@ -17,9 +18,8 @@ Bitacora::Bitacora(vector<string> campos, string campo_clave) {
     }
 }
 
-//Destructor de Bitacora
-Bitacora::~Bitacora(){
-};
+// Destructor de Bitacora
+Bitacora::~Bitacora(){};
 
 // Carga un registro individual a la Bitacora
 void Bitacora::CargaIndividual(vector<string> registro) {
@@ -29,8 +29,8 @@ void Bitacora::CargaIndividual(vector<string> registro) {
 }
 
 // Carga varios registros desde un archivo
-void Bitacora::CargaLotes(string nombreArchivo) {
-    ifstream archivo(nombreArchivo);
+vector<string> Bitacora::CargaLotes(string nombreArchivo) {
+    /* ifstream archivo(nombreArchivo);
     string linea;
     bool seguir=true;
 
@@ -59,7 +59,23 @@ void Bitacora::CargaLotes(string nombreArchivo) {
         }
     }
 
+    archivo.close(); */
+    vector<string> reg;
+
+    ifstream archivo(nombreArchivo);
+    string linea;
+
+    while (getline(archivo, linea)) {
+        istringstream ss(linea);
+        string mes, dia, hora, ip, razon;
+        ss >> mes >> dia >> hora >> ip;
+        getline(ss, razon);
+        reg = {mes, dia, hora, ip, razon};
+    }
+
     archivo.close();
+
+    return reg;
 }
 
 // TODO Ordena la Bitacora por un campo clave
@@ -73,7 +89,8 @@ bool Bitacora::Ordena(string campoClave, string nombreOrdenamiento) {
 }
 
 // TODO Consulta registros en la Bitacora dentro de un rango
-vector<vector<string>> Bitacora::Consulta(string campoClave, string desde, string hasta) {
+vector<vector<string>> Bitacora::Consulta(string campoClave, string desde,
+                                          string hasta) {
     vector<vector<string>> resultados;
     // Implementa aqui la logica de consulta utilizando campoClave, desde y
     // hasta
@@ -102,7 +119,7 @@ vector<string> quickSort(vector<int> arr, int low, int high) {
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }
-    for(int i=0; i<arr.size(); i++){
+    for (int i = 0; i < arr.size(); i++) {
         arrs.push_back(to_string(arr[i]));
     }
     return arrs;

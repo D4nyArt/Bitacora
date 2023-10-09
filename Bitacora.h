@@ -16,7 +16,7 @@ class Bitacora {
     void CargaIndividual(vector<string> registro);
 
     // Carga varios registros desde un archivo
-    void CargaLotes(string nombreArchivo);
+    vector<string> CargaLotes(string nombreArchivo);
 
     // Ordena la Bitacora por un campo clave
     bool Ordena(string campoClave, string nombreOrdenamiento);
