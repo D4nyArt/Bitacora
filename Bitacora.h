@@ -16,14 +16,15 @@ class Bitacora {
     void CargaIndividual(vector<string> registro);
 
     // Carga varios registros desde un archivo
-    vector<string> CargaLotes(string nombreArchivo);
+    void CargaLotes(string nombreArchivo);
 
     // Ordena la Bitacora por un campo clave
     bool Ordena(string nombreOrdenamiento);
 
     // Consulta registros en la Bitacora dentro de un rango
-    vector<vector<string>> Consulta(string campoClave, string desde,
-                                    string hasta);
+    vector<vector<string>> Consulta(string campoClave, string desde, string hasta);
+
+    void CopiaBitacora(string nombreArchivo);
 
     // Limpia la Bitacora
     void Limpiar();

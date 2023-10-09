@@ -2,8 +2,8 @@
 
 #include <algorithm>
 #include <fstream>
-#include <sstream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -19,8 +19,9 @@ Bitacora::Bitacora(vector<string> campos, string campo_clave) {
     bitacora_ordenada = bitacora;
 }
 
-// Destructor de Bitacora
-Bitacora::~Bitacora(){};
+//Destructor de Bitacora
+Bitacora::~Bitacora(){
+};
 
 // Carga un registro individual a la Bitacora
 void Bitacora::CargaIndividual(vector<string> registro) {
@@ -30,53 +31,22 @@ void Bitacora::CargaIndividual(vector<string> registro) {
 }
 
 // Carga varios registros desde un archivo
-vector<string> Bitacora::CargaLotes(string nombreArchivo) {
-    /* ifstream archivo(nombreArchivo);
-    string linea;
-    bool seguir=true;
-
-    while (getline(archivo, linea)) {
-        int reference_end = -1;
-
-        for (int i = 0; i < linea.size() - 1; i++) {
-            vector<string>* registro = new vector<string>();
-            int reference_start = reference_end + 1;
-            if (i == INDEX_ANTES_DE_ESPACIO_ANTES_DE_TEXTO) {
-                registro->push_back(linea.substr(reference_start + 1));
-                CargaIndividual(*registro);
-                delete registro;
-                seguir=false;
-            } else {
-                if (linea[i] == ' ') {
-                    int reference_end = i;
-                    int linea_longitud = reference_end - reference_start;
-                    registro->push_back(
-                        linea.substr(reference_start, linea_longitud));
-                    CargaIndividual(*registro);
-                    delete registro;
-                }
-            }
-            i++;
+void Bitacora::CargaLotes(string nombreArchivo) {
+    ifstream archivo(nombreArchivo);
+    if(archivo.is_open()){
+        string linea;
+        while(!archivo.eof()){
+            getline(archivo, linea);
+            istringstream ss(linea);
+            string mes, dia, hora, ip, razon;
+            ss >> mes >> dia >> hora >> ip;
+            getline(ss, razon);
+            razon.erase(0,1);
+            vector<string> reg = {mes, dia, hora, ip, razon};
+            CargaIndividual(reg);
         }
     }
-
-    archivo.close(); */
-    vector<string> reg;
-
-    ifstream archivo(nombreArchivo);
-    string linea;
-
-    while (getline(archivo, linea)) {
-        istringstream ss(linea);
-        string mes, dia, hora, ip, razon;
-        ss >> mes >> dia >> hora >> ip;
-        getline(ss, razon);
-        reg = {mes, dia, hora, ip, razon};
-    }
-
     archivo.close();
-
-    return reg;
 }
 
 // TODO Ordena la Bitacora por un campo clave
@@ -98,8 +68,7 @@ bool Bitacora::Ordena(string nombreOrdenamiento) {
 }
 
 // TODO Consulta registros en la Bitacora dentro de un rango
-vector<vector<string>> Bitacora::Consulta(string campoClave, string desde,
-                                          string hasta) {
+vector<vector<string>> Bitacora::Consulta(string campoClave, string desde, string hasta) {
     vector<vector<string>> resultados;
     // Implementa aqui la logica de consulta utilizando campoClave, desde y
     // hasta
@@ -134,7 +103,7 @@ vector<string> Bitacora::quickSort(vector<int> arr, int low, int high) {
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }
-    for (int i = 0; i < arr.size(); i++) {
+    for(int i=0; i<arr.size(); i++){
         arrs.push_back(to_string(arr[i]));
     }
     return arrs;
