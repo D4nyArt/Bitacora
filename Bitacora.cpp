@@ -16,6 +16,7 @@ Bitacora::Bitacora(vector<string> campos, string campo_clave) {
             campo_clave_index = i;
         }
     }
+    bitacora_ordenada = bitacora;
 }
 
 // Destructor de Bitacora
@@ -79,13 +80,21 @@ vector<string> Bitacora::CargaLotes(string nombreArchivo) {
 }
 
 // TODO Ordena la Bitacora por un campo clave
-bool Bitacora::Ordena(string campoClave, string nombreOrdenamiento) {
-    // El campo clave ya lo tenemos desde el constructor, segun yo no es
-    // necesario recibirlo como parametro en esta funcion, es necesario
-    // revisarlo
+bool Bitacora::Ordena(string nombreOrdenamiento) {
+    // Convertir vector de campo clave a int
+    vector<int> bitacora_temp;
+    transform(bitacora[campo_clave_index].begin(),
+              bitacora[campo_clave_index].end(), back_inserter(bitacora_temp),
+              [](const string& str) { return stoi(str); });
 
+    // Ordenar la bitacora
+    quickSort(bitacora_temp, 0, bitacora_temp.size() - 1);
+
+    /*
     ofstream bitacora_ordenada("bitacora_ordenada.txt");
     bitacora_ordenada << "my text here!" << endl;
+    */
+    return true;
 }
 
 // TODO Consulta registros en la Bitacora dentro de un rango
@@ -97,7 +106,7 @@ vector<vector<string>> Bitacora::Consulta(string campoClave, string desde,
     return resultados;
 }
 
-int partition(vector<int> arr, int low, int high) {
+int Bitacora::dividir(vector<int> arr, int low, int high) {
     int pivot = arr[high];
     int i = (low - 1);
 
@@ -105,17 +114,23 @@ int partition(vector<int> arr, int low, int high) {
         if (arr[j] <= pivot) {
             i++;
             swap(arr[i], arr[j]);
+            for (int k = 0; k < campos.size() - 1; k++) {
+                bitacora_ordenada[k][i].swap(bitacora_ordenada[k][j]);
+            }
         }
     }
     swap(arr[i + 1], arr[high]);
+    for (int k = 0; k < campos.size() - 1; k++) {
+        bitacora_ordenada[k][i + 1].swap(bitacora_ordenada[k][high]);
+    }
     return (i + 1);
 }
 
-// Quicksort function
-vector<string> quickSort(vector<int> arr, int low, int high) {
+// Quicksort modificado para modificar todos los campos de la bitacora
+vector<string> Bitacora::quickSort(vector<int> arr, int low, int high) {
     vector<string> arrs;
     if (low < high) {
-        int pi = partition(arr, low, high);
+        int pi = dividir(arr, low, high);
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }

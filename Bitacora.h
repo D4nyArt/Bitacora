@@ -19,7 +19,7 @@ class Bitacora {
     vector<string> CargaLotes(string nombreArchivo);
 
     // Ordena la Bitacora por un campo clave
-    bool Ordena(string campoClave, string nombreOrdenamiento);
+    bool Ordena(string nombreOrdenamiento);
 
     // Consulta registros en la Bitacora dentro de un rango
     vector<vector<string>> Consulta(string campoClave, string desde,
@@ -28,12 +28,14 @@ class Bitacora {
     // Limpia la Bitacora
     void Limpiar();
 
+    // Algoritmos de ordenamiento
+    int dividir(vector<int> arr, int low, int high);
+    vector<string> quickSort(vector<int> arr, int low, int high);
+
    private:
     string campo_clave;
     int campo_clave_index;
     vector<string> campos;
     vector<vector<string>> bitacora;
-
-    // Constantes
-    int INDEX_ANTES_DE_ESPACIO_ANTES_DE_TEXTO = 32;
+    vector<vector<string>> bitacora_ordenada;
 };
