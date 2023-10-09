@@ -70,6 +70,7 @@ vector<string> Bitacora::CargaLotes(string nombreArchivo) {
         string mes, dia, hora, ip, razon;
         ss >> mes >> dia >> hora >> ip;
         getline(ss, razon);
+        razon.erase(0,1);
         reg = {mes, dia, hora, ip, razon};
     }
 
