@@ -2,8 +2,9 @@
 
 #include <algorithm>
 #include <fstream>
-#include <string>
+#include <iostream>
 #include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -19,9 +20,8 @@ Bitacora::Bitacora(vector<string> campos, string campo_clave) {
     bitacora_ordenada = bitacora;
 }
 
-//Destructor de Bitacora
-Bitacora::~Bitacora(){
-};
+// Destructor de Bitacora
+Bitacora::~Bitacora(){};
 
 // Carga un registro individual a la Bitacora
 void Bitacora::CargaIndividual(vector<string> registro) {
@@ -33,15 +33,15 @@ void Bitacora::CargaIndividual(vector<string> registro) {
 // Carga varios registros desde un archivo
 void Bitacora::CargaLotes(string nombreArchivo) {
     ifstream archivo(nombreArchivo);
-    if(archivo.is_open()){
+    if (archivo.is_open()) {
         string linea;
-        while(!archivo.eof()){
+        while (!archivo.eof()) {
             getline(archivo, linea);
             istringstream ss(linea);
             string mes, dia, hora, ip, razon;
             ss >> mes >> dia >> hora >> ip;
             getline(ss, razon);
-            razon.erase(0,1);
+            razon.erase(0, 1);
             vector<string> reg = {mes, dia, hora, ip, razon};
             CargaIndividual(reg);
         }
@@ -60,15 +60,24 @@ bool Bitacora::Ordena(string nombreOrdenamiento) {
     // Ordenar la bitacora
     quickSort(bitacora_temp, 0, bitacora_temp.size() - 1);
 
-    /*
-    ofstream bitacora_ordenada("bitacora_ordenada.txt");
-    bitacora_ordenada << "my text here!" << endl;
-    */
-    return true;
+    // Insertar los valores de la bitacora ya ordenada en el archivo de texto
+    ofstream paraInsertar(nombreOrdenamiento);
+    if (paraInsertar.is_open()) {
+        int j = campos.size();
+        for (int i = 0; i < bitacora_ordenada.size() - 1; i++) {
+            for (int j = 0; j < campos.size() - 1; j++) {
+                paraInsertar << bitacora_ordenada[i][j] << " ";
+            }
+            paraInsertar << endl;
+        }
+        return true;
+    } else {
+        return false;
+    }
 }
-
 // TODO Consulta registros en la Bitacora dentro de un rango
-vector<vector<string>> Bitacora::Consulta(string campoClave, string desde, string hasta) {
+vector<vector<string>> Bitacora::Consulta(string campoClave, string desde,
+                                          string hasta) {
     vector<vector<string>> resultados;
     // Implementa aqui la logica de consulta utilizando campoClave, desde y
     // hasta
@@ -103,7 +112,7 @@ vector<string> Bitacora::quickSort(vector<int> arr, int low, int high) {
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }
-    for(int i=0; i<arr.size(); i++){
+    for (int i = 0; i < arr.size(); i++) {
         arrs.push_back(to_string(arr[i]));
     }
     return arrs;
