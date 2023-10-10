@@ -17,8 +17,6 @@ void showConsultaResult(vector<vector<string>> consultaRes) {
 }*/
 
 int main(int argc, char const *argv[]) {
-    cout << "hola dany uwu" << endl;
-
     Bitacora b1({"mes", "dia", "hora", "ip", "razon"}, "dia");
 
     b1.CargaLotes("bitacora.txt");
