@@ -8,7 +8,23 @@
 
 using namespace std;
 
+void showConsultaResult(vector<vector<string>> consultaRes) {
+    for (int i = 0; i < consultaRes.size(); i++) {
+        for (int j = 0; j < consultaRes[i].size(); j++) {
+            cout << consultaRes[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+void showVector(vector<string> vec) {
+    for (int i = 0; i < vec.size(); i++) {
+        cout << vec[i] << " " << endl;
+    }
+}
+
 // Constructor para crear una Bitacora vacia
+// Constructor si jala
 Bitacora::Bitacora(vector<string> campos, string campo_clave) {
     this->campo_clave = campo_clave;
     this->campos = campos;
@@ -17,7 +33,7 @@ Bitacora::Bitacora(vector<string> campos, string campo_clave) {
             campo_clave_index = i;
         }
     }
-    bitacora_ordenada = bitacora;
+    cout << "La Bitacora se creo correctamente" << endl;
 }
 
 // Destructor de Bitacora
@@ -25,32 +41,46 @@ Bitacora::~Bitacora(){};
 
 // Carga un registro individual a la Bitacora
 void Bitacora::CargaIndividual(vector<string> registro) {
+    cout << "se inicio la carga individual" << endl;
     for (int i = 0; i < registro.size() - 1; i++) {
+        cout << "xd=" << endl;
+        showVector(bitacora[i]);
         bitacora[i].push_back(registro[i]);
     }
+    cout << "carga individual se efectuo correctamente" << endl;
 }
 
 // Carga varios registros desde un archivo
 void Bitacora::CargaLotes(string nombreArchivo) {
     ifstream archivo(nombreArchivo);
+    cout << "el archivo se abrio correctamente" << endl;
     if (archivo.is_open()) {
+        cout << "El archivo sigue abierto" << endl;
         string linea;
         while (!archivo.eof()) {
+            cout << "hola" << endl;
             getline(archivo, linea);
+            cout << linea << endl;
             istringstream ss(linea);
             string mes, dia, hora, ip, razon;
             ss >> mes >> dia >> hora >> ip;
             getline(ss, razon);
             razon.erase(0, 1);
+            cout << "borrar el new line" << endl;
             vector<string> reg = {mes, dia, hora, ip, razon};
+            cout << "se creo el vector" << endl;
             CargaIndividual(reg);
+            cout << "fin del ciclo" << endl;
         }
     }
     archivo.close();
+    cout << "se ejecuto todo perfectamente y el vector resultante es: " << endl;
+    showConsultaResult(bitacora);
 }
 
 // TODO Ordena la Bitacora por un campo clave
 bool Bitacora::Ordena(string nombreOrdenamiento) {
+    bitacora_ordenada = bitacora;
     // Convertir vector de campo clave a int
     vector<int> bitacora_temp;
     transform(bitacora[campo_clave_index].begin(),
