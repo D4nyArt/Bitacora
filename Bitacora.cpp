@@ -76,16 +76,18 @@ bool Bitacora::Ordena(string nombreOrdenamiento) {
     }
 }
 // TODO Consulta registros en la Bitacora dentro de un rango
-// Debuggear el casting de string a int del campo clave de los registros de bitacora ordenada
+// Debuggear el casting de string a int del campo clave de los registros de
+// bitacora ordenada
 vector<vector<string>> Bitacora::Consulta(string desde, string hasta) {
     vector<vector<string>> resultados;
     int from = stoi(desde);
     int to = stoi(hasta);
-    for (vector<string> registro: bitacora_ordenada) {
+
+    for (vector<string> registro : bitacora_ordenada) {
         int valor = stoi(registro[campo_clave_index]);
-        if (valor >= desde && valor <= hasta) {
-                resultados.push_back(registro);
-            }
+        if (valor >= from && valor <= to) {
+            resultados.push_back(registro);
+        }
     }
     return resultados;
 }
