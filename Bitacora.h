@@ -22,18 +22,19 @@ class Bitacora {
     bool Ordena(string nombreOrdenamiento);
 
     // Consulta registros en la Bitacora dentro de un rango
-    vector<vector<string>> Consulta(string campoClave, string desde, string hasta);
+    vector<vector<string>> Consulta(string desde, string hasta);
 
     void CopiaBitacora(string nombreArchivo);
 
     // Limpia la Bitacora
     void Limpiar();
 
+   private:
+    
     // Algoritmos de ordenamiento
     int dividir(vector<int> arr, int low, int high);
     vector<string> quickSort(vector<int> arr, int low, int high);
 
-   private:
     string campo_clave;
     int campo_clave_index;
     vector<string> campos;

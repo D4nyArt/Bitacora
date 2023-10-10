@@ -76,8 +76,7 @@ bool Bitacora::Ordena(string nombreOrdenamiento) {
     }
 }
 // TODO Consulta registros en la Bitacora dentro de un rango
-vector<vector<string>> Bitacora::Consulta(string campoClave, string desde,
-                                          string hasta) {
+vector<vector<string>> Bitacora::Consulta(string desde, string hasta) {
     vector<vector<string>> resultados;
     // Implementa aqui la logica de consulta utilizando campoClave, desde y
     // hasta

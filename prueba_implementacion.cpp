@@ -106,7 +106,7 @@ int main() {
 				cout<<"Indique el mes final de la consulta: "<<endl;
 				cin>>hasta;
 				BC.CargaLotes("ordenamiento.txt");
-				showConsultaResult(BC.Consulta("Mes", desde, hasta));
+				showConsultaResult(BC.Consulta(desde, hasta));
 			}
 			break;
 		case 6:
