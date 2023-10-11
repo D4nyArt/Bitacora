@@ -8,21 +8,6 @@
 
 using namespace std;
 
-void showConsultaResult(vector<vector<string>> consultaRes) {
-    for (int i = 0; i < consultaRes.size(); i++) {
-        for (int j = 0; j < consultaRes[i].size(); j++) {
-            cout << consultaRes[i][j] << " ";
-        }
-        cout << endl;
-    }
-}
-
-void showVector(const vector<string> vec) {
-    for (const string str : vec) {
-        cout << str << " " << endl;
-    }
-}
-
 // Constructor para crear una Bitacora vacia
 // Constructor si jala
 Bitacora::Bitacora(vector<string> campos, string campo_clave) {
@@ -72,7 +57,7 @@ void Bitacora::CargaLotes(string nombreArchivo) {
 bool Bitacora::Ordena(string nombreOrdenamiento) {
     bitacora_ordenada = bitacora;
     // Convertir vector de campo clave a int
-    vector<int> bitacora_temp;
+    vector<int> bitacora_temp; 
     transform(bitacora[campo_clave_index].begin(),
               bitacora[campo_clave_index].end(), back_inserter(bitacora_temp),
               [](const string& str) { return stoi(str); });
@@ -100,14 +85,11 @@ bool Bitacora::Ordena(string nombreOrdenamiento) {
 // bitacora ordenada
 vector<vector<string>> Bitacora::Consulta(string desde, string hasta) {
     vector<vector<string>> resultados;
-    int from = stoi(desde);
-    int to = stoi(hasta);
+    int index_desde = busquedaBinaria(stoi(desde), true);
+    int index_hasta = busquedaBinaria(stoi(hasta), false);
 
-    for (vector<string> registro : bitacora_ordenada) {
-        int valor = stoi(registro[campo_clave_index]);
-        if (valor >= from && valor <= to) {
-            resultados.push_back(registro);
-        }
+    for (int i=index_desde; i<= index_hasta; i++) {
+        resultados.push_back(bitacora_ordenada[i]);
     }
     return resultados;
 }
@@ -144,6 +126,33 @@ vector<string> Bitacora::quickSort(vector<int> arr, int low, int high) {
         arrs.push_back(to_string(arr[i]));
     }
     return arrs;
+}
+
+
+int Bitacora::busquedaBinaria(int val, bool encontrarPrimero) {
+    int inicio = 0;
+    int fin = bitacora_ordenada.size() - 1;
+    int resultado = -1;
+
+    while (inicio <= fin) {
+        int medio = inicio + (fin - inicio) / 2;
+        int valorMedio = stoi(bitacora_ordenada[medio][campo_clave_index]);
+
+        if (valorMedio == val) {
+            resultado = medio;
+            if (encontrarPrimero) {
+                fin = medio - 1; // Buscar el primer índice hacia la izquierda
+            } else {
+                inicio = medio + 1; // Buscar el último índice hacia la derecha
+            }
+        } else if (valorMedio < val) {
+            inicio = medio + 1;
+        } else {
+            fin = medio - 1;
+        }
+    }
+
+    return resultado;
 }
 
 // Limpia la Biticora

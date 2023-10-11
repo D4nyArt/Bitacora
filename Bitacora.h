@@ -34,6 +34,7 @@ class Bitacora {
     // Algoritmos de ordenamiento
     int dividir(vector<int> arr, int low, int high);
     vector<string> quickSort(vector<int> arr, int low, int high);
+    int busquedaBinaria(int val, bool encontrarPrimero);
 
     string campo_clave;
     int campo_clave_index;
