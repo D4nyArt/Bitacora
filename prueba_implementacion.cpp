@@ -7,15 +7,6 @@
 
 using namespace std;
 
-void showConsultaResult(vector<vector<string>> consultaRes) {
-    for (int i = 0; i < consultaRes.size(); i++) {
-        for (int j = 0; j < consultaRes[i].size(); j++) {
-            cout << consultaRes[i][j] << " ";
-        }
-        cout << '\n';
-    }
-}
-
 int main() {
     Bitacora B({"Mes", "Dia", "Hora", "IP", "Falla"}, "Mes");
     Bitacora BC({"Mes", "Dia", "Hora", "IP", "Falla"}, "Mes");
