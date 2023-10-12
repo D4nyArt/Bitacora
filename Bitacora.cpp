@@ -49,7 +49,7 @@ Bitacora::Bitacora(evento campos, string campo_clave) {
             campo_clave_index = i;
         }
     }
-    bitacora.resize(campos.size());
+    // bitacora.resize(campos.size());
     cout << "Se creo la bitacora correctamente" << endl;
 }
 
@@ -65,7 +65,7 @@ Bitacora::~Bitacora(){};
  */
 void Bitacora::cargaIndividual(evento registro) {
     for (int i = 0; i < registro.size(); i++) {
-        bitacora[i].push_back(registro[i]);
+        bitacora.push_back(registro);
     }
 }
 
