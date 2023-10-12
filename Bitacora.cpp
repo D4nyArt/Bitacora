@@ -19,7 +19,7 @@
 
 using namespace std;
 
-void showConsultaResult(vector<Dato> consultaRes) {
+void showConsultaResult(vector<evento> consultaRes) {
     for (int i = 0; i < consultaRes.size(); i++) {
         for (int j = 0; j < consultaRes[i].size(); j++) {
             cout << consultaRes[i][j] << " ";
@@ -60,7 +60,7 @@ Bitacora::~Bitacora(){};
  * Agrega registros individuales a la bitacora existente.
  *
  * @param registro Un vector de cadenas de texto que contiene la informacion del
- * registro a agregar. Cada elemento del vector representa un dato especifico
+ * registro a agregar. Cada elemento del vector representa un evento especifico
  * del registro.
  */
 void Bitacora::cargaIndividual(vector<string> registro) {
@@ -158,7 +158,7 @@ bool Bitacora::ordena(string nombreOrdenamiento) {
  * en el orden en que se encuentran en la bitacora y pueden contener multiples
  * campos representados por cadenas de texto.
  */
-vector<Dato> Bitacora::consulta(string desde, string hasta) {
+vector<evento> Bitacora::consulta(string desde, string hasta) {
     vector<vector<string>> resultados;
     int index_desde = busquedaBinaria(stoi(desde), true);
     int index_hasta = busquedaBinaria(stoi(hasta), false);
@@ -178,11 +178,11 @@ vector<Dato> Bitacora::consulta(string desde, string hasta) {
  * @param end Indice de fin de la particion.
  * @return El indice donde se coloca el elemento pivote despues de la particion.
  */
-int Bitacora::partition(vector<Dato>& arr, int start, int end) {
+int Bitacora::partition(vector<evento>& arr, int start, int end) {
     int pivotElement = stoi(arr[campo_clave_index][end]);
-    Dato pivotDato = arr[end];
+    evento pivotevento = arr[end];
     int pivotIndex;
-    vector<Dato> temp;  // vector<int> temp
+    vector<evento> temp;  // vector<int> temp
 
     for (int i = start; i <= end; i++) {
         if (stoi(arr[campo_clave_index][i]) <
@@ -192,7 +192,7 @@ int Bitacora::partition(vector<Dato>& arr, int start, int end) {
     }
 
     pivotIndex = temp.size();
-    temp.push_back(pivotDato);  // temp.push_back(pivotElement)
+    temp.push_back(pivotevento);  // temp.push_back(pivotElement)
 
     for (int i = start; i <= end; i++) {
         if (stoi(arr[campo_clave_index][i]) >=
@@ -217,7 +217,7 @@ int Bitacora::partition(vector<Dato>& arr, int start, int end) {
  * @param start Indice de inicio de la lista a ordenar.
  * @param end Indice de fin de la lista a ordenar.
  */
-void Bitacora::quickSort(vector<Dato>& arr, int start, int end) {
+void Bitacora::quickSort(vector<evento>& arr, int start, int end) {
     if (start < end) {
         int partitionIndex = partition(arr, start, end);
         quickSort(arr, start, partitionIndex - 1);
