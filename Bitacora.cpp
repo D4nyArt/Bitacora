@@ -28,7 +28,7 @@ void showConsultaResult(vector<evento> consultaRes) {
     }
 }
 
-void showVectorStr(const vector<string> vec) {
+void showVectorStr(const evento vec) {
     for (const string str : vec) {
         cout << str << " " << endl;
     }
@@ -41,7 +41,7 @@ void showVectorInt(const vector<int> vec) {
 }
 
 // Constructor para crear una Bitacora vacia
-Bitacora::Bitacora(vector<string> campos, string campo_clave) {
+Bitacora::Bitacora(evento campos, string campo_clave) {
     this->campo_clave = campo_clave;
     this->campos = campos;
     for (int i = 0; i < campos.size() - 1; i++) {
@@ -63,7 +63,7 @@ Bitacora::~Bitacora(){};
  * registro a agregar. Cada elemento del vector representa un evento especifico
  * del registro.
  */
-void Bitacora::cargaIndividual(vector<string> registro) {
+void Bitacora::cargaIndividual(evento registro) {
     for (int i = 0; i < registro.size(); i++) {
         bitacora[i].push_back(registro[i]);
     }
@@ -81,7 +81,7 @@ void Bitacora::cargaLotes(string nombreArchivo) {
         string linea;
         while (getline(archivo, linea)) {
             istringstream ss(linea);
-            vector<string> reg(campos.size());
+            evento reg(campos.size());
             string campo_especifico;
             while (ss >> campo_especifico) {
                 reg.push_back(campo_especifico);
@@ -159,7 +159,7 @@ bool Bitacora::ordena(string nombreOrdenamiento) {
  * campos representados por cadenas de texto.
  */
 vector<evento> Bitacora::consulta(string desde, string hasta) {
-    vector<vector<string>> resultados;
+    vector<evento> resultados;
     int index_desde = busquedaBinaria(stoi(desde), true);
     int index_hasta = busquedaBinaria(stoi(hasta), false);
 
