@@ -55,23 +55,27 @@ void Bitacora::CargaIndividual(vector<string> registro) {
 
 // Carga varios registros desde un archivo
 // CargaLotes ya jala
+// En teoria CargaLotes ya esta generelizado
 void Bitacora::CargaLotes(string nombreArchivo) {
     ifstream archivo(nombreArchivo);
     if (archivo.is_open()) {
         string linea;
-        while (!archivo.eof()) {
-            getline(archivo, linea);
+        while (getline(archivo, linea)) {
             istringstream ss(linea);
-            // Agreagar ciclo para generalizar lectura del archivo
-            string mes, dia, hora, ip, razon;
-            ss >> mes >> dia >> hora >> ip;
-            getline(ss, razon);
-            razon.erase(0, 1);
-            vector<string> reg = {mes, dia, hora, ip, razon};
+            vector<string> reg(campos.size());
+            string campo_especifico;
+            while (ss >> campo_especifico) {
+                reg.push_back(campo_especifico);
+            }
+            if (!ss.eof()) {
+                string campo_especifico_espacios;
+                getline(ss, campo_especifico_espacios);
+                reg.push_back(campo_especifico_espacios);
+            }
             CargaIndividual(reg);
         }
+        archivo.close();
     }
-    archivo.close();
 }
 
 // TODO Ordena la Bitacora por un campo clave
