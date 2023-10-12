@@ -41,7 +41,6 @@ void showVectorInt(const vector<int> vec) {
 }
 
 // Constructor para crear una Bitacora vacia
-// Constructor si jala
 Bitacora::Bitacora(vector<string> campos, string campo_clave) {
     this->campo_clave = campo_clave;
     this->campos = campos;
@@ -56,16 +55,25 @@ Bitacora::Bitacora(vector<string> campos, string campo_clave) {
 // Destructor de Bitacora
 Bitacora::~Bitacora(){};
 
-// Carga un registro individual a la Bitacora
-// CargaIndividual ya jala
+/**
+ * Agrega registros individuales a la bitacora existente.
+ *
+ * @param registro Un vector de cadenas de texto que contiene la informacion del
+ * registro a agregar. Cada elemento del vector representa un dato especifico
+ * del registro.
+ */
 void Bitacora::cargaIndividual(vector<string> registro) {
     for (int i = 0; i < registro.size(); i++) {
         bitacora[i].push_back(registro[i]);
     }
 }
 
-// Carga varios registros desde un archivo
-// CargaLotes ya jala
+/**
+ * Carga varios registros desde un archivo de texto.
+ *
+ * @param nombreArchivo El nombre del archivo desde el cual se cargarán los
+ * registros. Debe estar en un formato compatible con los campos de la bitacora.
+ */
 void Bitacora::cargaLotes(string nombreArchivo) {
     ifstream archivo(nombreArchivo);
     if (archivo.is_open()) {
@@ -88,8 +96,19 @@ void Bitacora::cargaLotes(string nombreArchivo) {
     }
 }
 
+/**
+ * Ordena la Bitacora segun un campo clave y guarda los registros en un archivo
+ * de texto.
+ *
+ * @param nombreOrdenamiento El nombre del archivo de texto en el que se
+ * guardarán los registros ordenados.
+ * @return Devuelve un valor booleano, true si la operacion de ordenamiento y
+ * guardado fue exitosa, o false en caso de que no se pueda abrir el archivo de
+ * destino. La Bitacora ordenada se guarda en el archivo especificado si la
+ * operación es exitosa.
+ */
 // TODO Ordena la Bitacora por un campo clave
-void Bitacora::ordena(string nombreOrdenamiento) {
+bool Bitacora::ordena(string nombreOrdenamiento) {
     bitacora_ordenada = bitacora;
     // Convertir vector de campo clave a int
     vector<int> bitacora_temp;
@@ -118,10 +137,21 @@ void Bitacora::ordena(string nombreOrdenamiento) {
     }
     */
 }
-// TODO Consulta registros en la Bitacora dentro de un rango
-// Debuggear el casting de string a int del campo clave de los registros de
-// bitacora ordenada
-vector<vector<string>> Bitacora::consulta(string desde, string hasta) {
+
+/**
+ * Realiza una consulta en una bitacora previamente ordenada para recuperar
+ * registros dentro de un rango de valores.
+ *
+ * @param desde Limite inferior del rango de registros
+ * a consultar.
+ * @param hasta Limite superior del rango de registros
+ * a consultar.
+ * @return Un vector de vectores de cadenas de texto que
+ * caen dentro del rango especificado [desde, hasta]. Los registros se devuelven
+ * en el orden en que se encuentran en la bitacora y pueden contener multiples
+ * campos representados por cadenas de texto.
+ */
+vector<Dato> Bitacora::consulta(string desde, string hasta) {
     vector<vector<string>> resultados;
     int index_desde = busquedaBinaria(stoi(desde), true);
     int index_hasta = busquedaBinaria(stoi(hasta), false);
@@ -194,5 +224,7 @@ int Bitacora::busquedaBinaria(int val, bool encontrarPrimero) {
     return resultado;
 }
 
-// Limpia la Biticora
+/**
+ * Limpia la Bitácora, eliminando todos los registros almacenados en ella.
+ */
 void Bitacora::limpiar() { bitacora.clear(); }

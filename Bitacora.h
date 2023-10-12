@@ -21,7 +21,7 @@ class Bitacora {
     void cargaLotes(string nombreArchivo);
 
     // Ordena la Bitacora por un campo clave
-    void ordena(string nombreOrdenamiento);
+    bool ordena(string nombreOrdenamiento);
 
     // Consulta registros en la Bitacora dentro de un rango
     vector<Dato> consulta(string desde, string hasta);
