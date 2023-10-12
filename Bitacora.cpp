@@ -50,6 +50,7 @@ Bitacora::Bitacora(vector<string> campos, string campo_clave) {
         }
     }
     bitacora.resize(campos.size());
+    cout << "Se creo la bitacora correctamente" << endl;
 }
 
 // Destructor de Bitacora
@@ -94,6 +95,7 @@ void Bitacora::cargaLotes(string nombreArchivo) {
         }
         archivo.close();
     }
+    cout << "Se cargo todo perfectamente" << endl;
 }
 
 /**
@@ -112,12 +114,17 @@ bool Bitacora::ordena(string nombreOrdenamiento) {
     bitacora_ordenada = bitacora;
     // Convertir vector de campo clave a int
     vector<int> bitacora_temp;
+    /*
     transform(bitacora[campo_clave_index].begin(),
-              bitacora[campo_clave_index].end(), back_inserter(bitacora_temp),
+              bitacora[campo_clave_index].end(),
+              back_inserter(bitacora_ordenada[campo_clave_index]),
               [](const string& str) { return stoi(str); });
+    */
 
     // Ordenar la bitacora
-    quickSort(bitacora_temp, 0, bitacora_temp.size() - 1);
+    cout << "Se inicia el ordenamiento" << endl;
+    quickSort(bitacora_ordenada, 0, bitacora_ordenada.size() - 1);
+    showConsultaResult(bitacora_ordenada);
 
     // Insertar los valores de la bitacora ya ordenada en el archivo de
     // texto
@@ -162,22 +169,34 @@ vector<Dato> Bitacora::consulta(string desde, string hasta) {
     return resultados;
 }
 
-int Bitacora::partition(vector<int>& arr, int start, int end) {
-    int pivotElement = arr[end];
+/**
+ * Realiza la partición de un arreglo en el contexto de un algoritmo de
+ * ordenamiento QuickSort.
+ *
+ * @param arr Un vector de enteros que se va a particionar.
+ * @param start Indice de inicio de la particion.
+ * @param end Indice de fin de la particion.
+ * @return El indice donde se coloca el elemento pivote despues de la particion.
+ */
+int Bitacora::partition(vector<Dato>& arr, int start, int end) {
+    int pivotElement = stoi(arr[campo_clave_index][end]);
+    Dato pivotDato = arr[end];
     int pivotIndex;
-    vector<int> temp;
+    vector<Dato> temp;  // vector<int> temp
 
     for (int i = start; i <= end; i++) {
-        if (arr[i] < pivotElement) {
+        if (stoi(arr[campo_clave_index][i]) <
+            pivotElement) {  // arr[i] < pivotElement
             temp.push_back(arr[i]);
         }
     }
 
     pivotIndex = temp.size();
-    temp.push_back(pivotElement);
+    temp.push_back(pivotDato);  // temp.push_back(pivotElement)
 
     for (int i = start; i <= end; i++) {
-        if (arr[i] >= pivotElement) {
+        if (stoi(arr[campo_clave_index][i]) >=
+            pivotElement) {  // arr[i] >= pivotElement
             temp.push_back(arr[i]);
         }
     }
@@ -190,7 +209,15 @@ int Bitacora::partition(vector<int>& arr, int start, int end) {
     return start + pivotIndex > end ? end : start + pivotIndex;
 }
 
-void Bitacora::quickSort(vector<int>& arr, int start, int end) {
+/**
+ * Realiza la ordenacion de un vector y ordena una copia de la bitacora
+ * utilizando el algoritmo QuickSort.
+ *
+ * @param arr Vector de enteros que se va a ordenar.
+ * @param start Indice de inicio de la lista a ordenar.
+ * @param end Indice de fin de la lista a ordenar.
+ */
+void Bitacora::quickSort(vector<Dato>& arr, int start, int end) {
     if (start < end) {
         int partitionIndex = partition(arr, start, end);
         quickSort(arr, start, partitionIndex - 1);
@@ -198,6 +225,21 @@ void Bitacora::quickSort(vector<int>& arr, int start, int end) {
     }
 }
 
+/**
+ * Realiza una busqueda binaria en la bitcora ordenada para encontrar un valor
+ * especifico.
+ *
+ * @param val El valor que se desea buscar en la bitacora.
+ * @param encontrarPrimero Un valor booleano que determina si se busca el primer
+ * índice donde se encuentra el valor (true) o el último índice (false) en caso
+ * de valores duplicados.
+ * @return El indice en la bitacora donde se encuentra el valor buscado. Si no
+ * se encuentra, se devuelve -1. Si se especifica buscar el primer indice y no
+ * se encuentra el valor, se devuelve el indice donde deberia insertarse para
+ * mantener el orden. Si se especifica buscar el ultimo indice y no se encuentra
+ * el valor, se devuelve el indice inmediatamente despues del ultimo elemento
+ * igual.
+ */
 int Bitacora::busquedaBinaria(int val, bool encontrarPrimero) {
     int inicio = 0;
     int fin = bitacora_ordenada.size() - 1;

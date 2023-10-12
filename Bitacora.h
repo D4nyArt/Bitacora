@@ -26,15 +26,13 @@ class Bitacora {
     // Consulta registros en la Bitacora dentro de un rango
     vector<Dato> consulta(string desde, string hasta);
 
-    void CopiaBitacora(string nombreArchivo);
-
     // Limpia la Bitacora
     void limpiar();
 
    private:
     // Algoritmos de ordenamiento
-    int partition(vector<int>& arr, int start, int end);
-    void quickSort(vector<int>& arr, int start, int end);
+    int partition(vector<Dato>& arr, int start, int end);
+    void quickSort(vector<Dato>& arr, int start, int end);
     int busquedaBinaria(int val, bool encontrarPrimero);
 
     string campo_clave;

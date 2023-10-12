@@ -19,8 +19,8 @@ void showConsultaResult(vector<vector<string>> consultaRes) {
 int main(int argc, char const *argv[]) {
     Bitacora b1({"mes", "dia", "hora", "ip", "razon"}, "dia");
 
-    b1.CargaLotes("bitacora.txt");
-    b1.Ordena("testingb1.txt");
+    b1.cargaLotes("bitacora.txt");
+    b1.ordena("testingb1.txt");
     // showConsultaResult(b1.Consulta("4", "12"));
     return 0;
 }
