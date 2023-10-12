@@ -7,14 +7,14 @@
 
 using namespace std;
 
-void showConsultaResult(vector<vector<string>> consultaRes) {
+/*void showConsultaResult(vector<vector<string>> consultaRes) {
     for (int i = 0; i < consultaRes.size(); i++) {
         for (int j = 0; j < consultaRes[i].size(); j++) {
             cout << consultaRes[i][j] << " ";
         }
         cout << endl;
     }
-}
+}*/
 
 int main() {
 	Bitacora B({"Mes", "Dia", "Hora", "IP", "Falla"}, "Dia");
@@ -69,7 +69,7 @@ int main() {
 			    }
 				cout<<"Indica la direccion IP (en formato xxx.xx.xxx.xx:xxxx): ";
 				cin>>registro[3];
-				regex regexIP("^(\\d{1,3}\\.){3}\\d{1,3}:(\\d{1,5})$");
+				regex regexIP("^(\\d{3}\\.\\d{2}\\.\\d{3}\\.\\d{2}):(\\d{4})$");
 			    while (!regex_match(registro[3], regexIP)) {
 			        cout << "Asegurese de cumplir con el formato de la direccion IP e ingrese nuevamente: ";
 			        cin.ignore();
@@ -78,7 +78,7 @@ int main() {
 				cout<<"Indica la razon de falla: ";
 				cin.ignore();
 				getline(cin, registro[4]);
-				B.CargaIndividual(registro);
+				B.cargaIndividual(registro);
 				bitacora_limpia=false;
 				cout<<"Carga individual exitosa"<<endl;
 			}
@@ -90,7 +90,7 @@ int main() {
             	vector<string> registro(5);
 				cout<<"Ingrese el nombre del archivo con los registros a cargar: ";
 				cin>>nomArchivo;
-		        B.CargaLotes(nomArchivo);
+		        B.cargaLotes(nomArchivo);
 		        bitacora_limpia=false;
 	        	cout<<"Lote cargado"<<endl;
 			    }
@@ -102,9 +102,10 @@ int main() {
 			if(bitacora_limpia){
                 cout<<"No hay registros para ordenar"<<endl;
             } else{
-				B.Ordena("ordenamiento.txt");
+				B.ordena("ordenamiento.txt");
 				bitacora_ordenada=true;
 				cout<<"Ordenamiento exitoso"<<endl;
+			}
 			break;
 		case 5:
 			if(!bitacora_creada){
@@ -120,8 +121,8 @@ int main() {
 					cin>>desde;
 					cout<<"Indique el dia final de la consulta: ";
 					cin>>hasta;
-					B.CargaLotes("ordenamiento.txt");
-					B.Consulta(desde, hasta);
+					B.cargaLotes("ordenamiento.txt");
+					B.consulta(desde, hasta);
 					showConsultaResult(registros);
 			}
 			break;
@@ -129,7 +130,7 @@ int main() {
 			if(!bitacora_creada){
                 cout<<"La bitacora no ha sido creada todavia"<<endl;
             } else{
-				B.Limpiar();
+				B.limpiar();
 				bitacora_limpia=true;
 				cout<<"Bitacora limpia :)"<<endl;
 			}
