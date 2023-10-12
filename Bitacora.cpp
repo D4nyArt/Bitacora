@@ -107,16 +107,13 @@ void Bitacora::Ordena(string nombreOrdenamiento) {
 // TODO Consulta registros en la Bitacora dentro de un rango
 // Debuggear el casting de string a int del campo clave de los registros de
 // bitacora ordenada
-vector<Dato> Bitacora::Consulta(string desde, string hasta) {
-    vector<Dato> resultados;
-    int from = stoi(desde);
-    int to = stoi(hasta);
+vector<vector<string>> Bitacora::Consulta(string desde, string hasta) {
+    vector<vector<string>> resultados;
+    int index_desde = busquedaBinaria(stoi(desde), true);
+    int index_hasta = busquedaBinaria(stoi(hasta), false);
 
-    for (vector<string> registro : bitacora_ordenada) {
-        int valor = stoi(registro[campo_clave_index]);
-        if (valor >= from && valor <= to) {
-            resultados.push_back(registro);
-        }
+    for (int i = index_desde; i <= index_hasta; i++) {
+        resultados.push_back(bitacora_ordenada[i]);
     }
     return resultados;
 }
@@ -155,6 +152,32 @@ void Bitacora::quickSort(vector<int>& arr, int start, int end) {
         quickSort(arr, start, partitionIndex - 1);
         quickSort(arr, partitionIndex + 1, end);
     }
+}
+
+int Bitacora::busquedaBinaria(int val, bool encontrarPrimero) {
+    int inicio = 0;
+    int fin = bitacora_ordenada.size() - 1;
+    int resultado = -1;
+
+    while (inicio <= fin) {
+        int medio = inicio + (fin - inicio) / 2;
+        int valorMedio = stoi(bitacora_ordenada[medio][campo_clave_index]);
+
+        if (valorMedio == val) {
+            resultado = medio;
+            if (encontrarPrimero) {
+                fin = medio - 1;  // Buscar el primer índice hacia la izquierda
+            } else {
+                inicio = medio + 1;  // Buscar el último índice hacia la derecha
+            }
+        } else if (valorMedio < val) {
+            inicio = medio + 1;
+        } else {
+            fin = medio - 1;
+        }
+    }
+
+    return resultado;
 }
 
 // Limpia la Biticora

@@ -35,6 +35,7 @@ class Bitacora {
     // Algoritmos de ordenamiento
     int partition(vector<int>& arr, int start, int end);
     void quickSort(vector<int>& arr, int start, int end);
+    int busquedaBinaria(int val, bool encontrarPrimero);
 
     string campo_clave;
     int campo_clave_index;
