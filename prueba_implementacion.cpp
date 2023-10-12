@@ -9,10 +9,9 @@ using namespace std;
 
 int main() {
 	Bitacora B({"Mes", "Dia", "Hora", "IP", "Falla"}, "Dia");
-	Bitacora BC({"Mes", "Dia", "Hora", "IP", "Falla"}, "Dia");
 	int choice;
 	vector<vector<string>> registros;
-	string desde, hasta, lote;
+	string desde, hasta, nomArchivo;
 	bool bitacora_creada=false;
 	bool bitacora_ordenada=false;
 	bool bitacora_limpia=true;
@@ -71,7 +70,6 @@ int main() {
 				cin.ignore();
 				getline(cin, registro[4]);
 				B.CargaIndividual(registro);
-				registros.push_back(registro);
 				bitacora_limpia=false;
 				cout<<"Carga individual exitosa"<<endl;
 			}
@@ -81,22 +79,9 @@ int main() {
                 cout<<"La bitacora no ha sido creada todavia"<<endl;
             } else{
             	vector<string> registro(5);
-				cout<<"Ingrese el lote completo (Mes Dia Hora IP Falla): ";
-				cin.ignore();
-				getline(cin, lote);
-				//int cantidadEspacios = count(lote.begin(), lote.end(), ' ');
-				if(count(lote.begin(), lote.end(), ' ')<4){
-			        cout<<"Asegurese de cumplir con los cinco campos e ingrese nuevamente: ";
-			        cin.ignore();
-					getline(cin, lote);
-			    }
-		    	stringstream ss(lote);
-	            for (int i = 0; i < 4; ++i) {
-	                ss >> registro[i];
-	            }
-	            getline(ss, registro[4]);
-		        B.CargaLotes(lote);
-		        registros.push_back(registro);
+				cout<<"Ingrese el nombre del archivo con los registros a cargar: ";
+				cin>>nomArchivo;
+		        B.CargaLotes(nomArchivo);
 		        bitacora_limpia=false;
 	        	cout<<"Lote cargado"<<endl;
 			    }
@@ -104,14 +89,13 @@ int main() {
 		case 4:
 			if(!bitacora_creada){
                 cout<<"La bitacora no ha sido creada todavia"<<endl;
+            } 
+			if(bitacora_limpia){
+                cout<<"No hay registros para ordenar"<<endl;
             } else{
 				B.Ordena("ordenamiento.txt");
 				bitacora_ordenada=true;
-				cout<<"Ordenamiento exitoso"<<endl; 
-				/*if(!B.Bitacora({"Mes", "Dia", "Hora", "IP", "Falla"}, "Mes")){
-					cout<<"No se puede ordenar si no existe un registro previo"<<endl;
-				}*/
-			}
+				cout<<"Ordenamiento exitoso"<<endl;
 			break;
 		case 5:
 			if(!bitacora_creada){
@@ -121,14 +105,14 @@ int main() {
                 cout<<"La bitacora no ha sido ordenada todavia"<<endl;
             } */
 			if(bitacora_limpia){
-                cout<<"La bitacora esta limpia, no hay registros para consultar"<<endl;
+                cout<<"No hay registros para consultar"<<endl;
             } else{
 					cout<<"Indique el dia inicial de la consulta: ";
 					cin>>desde;
 					cout<<"Indique el dia final de la consulta: ";
 					cin>>hasta;
-					BC.CargaLotes("ordenamiento.txt");
-					BC.Consulta(desde, hasta);
+					B.CargaLotes("ordenamiento.txt");
+					B.Consulta(desde, hasta);
 					showConsultaResult(registros);
 			}
 			break;
