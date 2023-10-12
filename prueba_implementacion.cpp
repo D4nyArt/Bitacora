@@ -110,12 +110,10 @@ int main() {
 		case 5:
 			if(!bitacora_creada){
                 cout<<"La bitacora no ha sido creada todavia"<<endl;
-            } 
-			if(!bitacora_ordenada){
-                cout<<"La bitacora no ha sido ordenada todavia"<<endl;
-            }
-			if(bitacora_limpia){
+            } else if(bitacora_limpia){
                 cout<<"No hay registros para consultar"<<endl;
+            } else if(!bitacora_ordenada){
+                cout<<"La bitacora no ha sido ordenada todavia"<<endl;
             } else{
 					cout<<"Indique el dia inicial de la consulta: ";
 					cin>>desde;
