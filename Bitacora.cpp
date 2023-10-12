@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void showConsultaResult(vector<vector<string>> consultaRes) {
+void showConsultaResult(vector<Dato> consultaRes) {
     for (int i = 0; i < consultaRes.size(); i++) {
         for (int j = 0; j < consultaRes[i].size(); j++) {
             cout << consultaRes[i][j] << " ";
@@ -17,9 +17,15 @@ void showConsultaResult(vector<vector<string>> consultaRes) {
     }
 }
 
-void showVector(const vector<string> vec) {
+void showVectorStr(const vector<string> vec) {
     for (const string str : vec) {
         cout << str << " " << endl;
+    }
+}
+
+void showVectorInt(const vector<int> vec) {
+    for (const int num : vec) {
+        cout << num << " ";
     }
 }
 
@@ -55,8 +61,8 @@ void Bitacora::CargaLotes(string nombreArchivo) {
         string linea;
         while (!archivo.eof()) {
             getline(archivo, linea);
-            cout << linea << endl;
             istringstream ss(linea);
+            // Agreagar ciclo para generalizar lectura del archivo
             string mes, dia, hora, ip, razon;
             ss >> mes >> dia >> hora >> ip;
             getline(ss, razon);
@@ -69,7 +75,7 @@ void Bitacora::CargaLotes(string nombreArchivo) {
 }
 
 // TODO Ordena la Bitacora por un campo clave
-bool Bitacora::Ordena(string nombreOrdenamiento) {
+void Bitacora::Ordena(string nombreOrdenamiento) {
     bitacora_ordenada = bitacora;
     // Convertir vector de campo clave a int
     vector<int> bitacora_temp;
@@ -80,7 +86,9 @@ bool Bitacora::Ordena(string nombreOrdenamiento) {
     // Ordenar la bitacora
     quickSort(bitacora_temp, 0, bitacora_temp.size() - 1);
 
-    // Insertar los valores de la bitacora ya ordenada en el archivo de texto
+    // Insertar los valores de la bitacora ya ordenada en el archivo de
+    // texto
+    /*
     ofstream paraInsertar(nombreOrdenamiento);
     if (paraInsertar.is_open()) {
         int j = campos.size();
@@ -94,12 +102,13 @@ bool Bitacora::Ordena(string nombreOrdenamiento) {
     } else {
         return false;
     }
+    */
 }
 // TODO Consulta registros en la Bitacora dentro de un rango
 // Debuggear el casting de string a int del campo clave de los registros de
 // bitacora ordenada
-vector<vector<string>> Bitacora::Consulta(string desde, string hasta) {
-    vector<vector<string>> resultados;
+vector<Dato> Bitacora::Consulta(string desde, string hasta) {
+    vector<Dato> resultados;
     int from = stoi(desde);
     int to = stoi(hasta);
 
@@ -112,38 +121,40 @@ vector<vector<string>> Bitacora::Consulta(string desde, string hasta) {
     return resultados;
 }
 
-int Bitacora::dividir(vector<int> arr, int low, int high) {
-    int pivot = arr[high];
-    int i = (low - 1);
+int Bitacora::partition(vector<int>& arr, int start, int end) {
+    int pivotElement = arr[end];
+    int pivotIndex;
+    vector<int> temp;
 
-    for (int j = low; j <= high - 1; j++) {
-        if (arr[j] <= pivot) {
-            i++;
-            swap(arr[i], arr[j]);
-            for (int k = 0; k < campos.size() - 1; k++) {
-                bitacora_ordenada[k][i].swap(bitacora_ordenada[k][j]);
-            }
+    for (int i = start; i <= end; i++) {
+        if (arr[i] < pivotElement) {
+            temp.push_back(arr[i]);
         }
     }
-    swap(arr[i + 1], arr[high]);
-    for (int k = 0; k < campos.size() - 1; k++) {
-        bitacora_ordenada[k][i + 1].swap(bitacora_ordenada[k][high]);
+
+    pivotIndex = temp.size();
+    temp.push_back(pivotElement);
+
+    for (int i = start; i <= end; i++) {
+        if (arr[i] >= pivotElement) {
+            temp.push_back(arr[i]);
+        }
     }
-    return (i + 1);
+
+    int index = 0;
+    for (int i = start; i <= end && index < temp.size(); i++) {
+        arr[i] = temp[index];
+        index++;
+    }
+    return start + pivotIndex > end ? end : start + pivotIndex;
 }
 
-// Quicksort modificado para modificar todos los campos de la bitacora
-vector<string> Bitacora::quickSort(vector<int> arr, int low, int high) {
-    vector<string> arrs;
-    if (low < high) {
-        int pi = dividir(arr, low, high);
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
+void Bitacora::quickSort(vector<int>& arr, int start, int end) {
+    if (start < end) {
+        int partitionIndex = partition(arr, start, end);
+        quickSort(arr, start, partitionIndex - 1);
+        quickSort(arr, partitionIndex + 1, end);
     }
-    for (int i = 0; i < arr.size(); i++) {
-        arrs.push_back(to_string(arr[i]));
-    }
-    return arrs;
 }
 
 // Limpia la Biticora

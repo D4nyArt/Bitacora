@@ -4,6 +4,8 @@
 
 using namespace std;
 
+typedef vector<string> Dato;
+
 class Bitacora {
    public:
     // Constructor para crear una Bitacora vacia
@@ -19,10 +21,10 @@ class Bitacora {
     void CargaLotes(string nombreArchivo);
 
     // Ordena la Bitacora por un campo clave
-    bool Ordena(string nombreOrdenamiento);
+    void Ordena(string nombreOrdenamiento);
 
     // Consulta registros en la Bitacora dentro de un rango
-    vector<vector<string>> Consulta(string desde, string hasta);
+    vector<Dato> Consulta(string desde, string hasta);
 
     void CopiaBitacora(string nombreArchivo);
 
@@ -30,14 +32,13 @@ class Bitacora {
     void Limpiar();
 
    private:
-    
     // Algoritmos de ordenamiento
-    int dividir(vector<int> arr, int low, int high);
-    vector<string> quickSort(vector<int> arr, int low, int high);
+    int partition(vector<int>& arr, int start, int end);
+    void quickSort(vector<int>& arr, int start, int end);
 
     string campo_clave;
     int campo_clave_index;
     vector<string> campos;
-    vector<vector<string>> bitacora;
-    vector<vector<string>> bitacora_ordenada;
+    vector<Dato> bitacora;
+    vector<Dato> bitacora_ordenada;
 };
