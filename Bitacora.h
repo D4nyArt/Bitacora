@@ -9,13 +9,13 @@ typedef vector<string> evento;
 class Bitacora {
    public:
     // Constructor para crear una Bitacora vacia
-    Bitacora(vector<string> campos, string campo_clave);
+    Bitacora(evento campos, string campo_clave);
 
     // Destructor de Bitacora
     ~Bitacora();
 
     // Carga un registro individual a la Bitacora
-    void cargaIndividual(vector<string> registro);
+    void cargaIndividual(evento registro);
 
     // Carga varios registros desde un archivo
     void cargaLotes(string nombreArchivo);
@@ -37,7 +37,7 @@ class Bitacora {
 
     string campo_clave;
     int campo_clave_index;
-    vector<string> campos;
+    evento campos;
     vector<evento> bitacora;
     vector<evento> bitacora_ordenada;
 };
