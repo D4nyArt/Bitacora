@@ -1,5 +1,4 @@
 #include "Bitacora.h"
-
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -72,7 +71,7 @@ bool Bitacora::Ordena(string nombreOrdenamiento) {
         for (int i = 0; i < bitacora_ordenada.size() - 1; i++) {
             for (int j = 0; j < campos.size() - 1; j++) {
                 paraInsertar << bitacora_ordenada[i][j] << " ";
-            }
+            } 
             paraInsertar << endl;
         }
         return true;
@@ -122,12 +121,11 @@ vector<string> Bitacora::quickSort(vector<int> arr, int low, int high) {
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }
-    for (int i = 0; i < arr.size(); i++) {
+    for (int i = 0; i < arr.size(); i++) {                
         arrs.push_back(to_string(arr[i]));
     }
     return arrs;
 }
-
 
 int Bitacora::busquedaBinaria(int val, bool encontrarPrimero) {
     int inicio = 0;
