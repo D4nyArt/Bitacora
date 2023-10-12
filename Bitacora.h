@@ -15,21 +15,21 @@ class Bitacora {
     ~Bitacora();
 
     // Carga un registro individual a la Bitacora
-    void CargaIndividual(vector<string> registro);
+    void cargaIndividual(vector<string> registro);
 
     // Carga varios registros desde un archivo
-    void CargaLotes(string nombreArchivo);
+    void cargaLotes(string nombreArchivo);
 
     // Ordena la Bitacora por un campo clave
-    void Ordena(string nombreOrdenamiento);
+    void ordena(string nombreOrdenamiento);
 
     // Consulta registros en la Bitacora dentro de un rango
-    vector<Dato> Consulta(string desde, string hasta);
+    vector<Dato> consulta(string desde, string hasta);
 
     void CopiaBitacora(string nombreArchivo);
 
     // Limpia la Bitacora
-    void Limpiar();
+    void limpiar();
 
    private:
     // Algoritmos de ordenamiento

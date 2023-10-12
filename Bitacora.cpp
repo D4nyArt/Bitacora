@@ -1,3 +1,14 @@
+/*Este programa es la implementacion del ADT de una bitacora generalizada que
+ * consta de los metodos: cargaIndividual, cargaLotes, ordena, consulta y
+ * limpia*/
+
+// Creado el 5 de Octubre del 2023
+// Editado ----------------------
+
+// Esteban Leal Menéndez | A01369877
+// Stephanie Ortega Espinosa | A01369902
+// Daniel Arteaga Mercado | A01369706
+
 #include "Bitacora.h"
 
 #include <algorithm>
@@ -47,7 +58,7 @@ Bitacora::~Bitacora(){};
 
 // Carga un registro individual a la Bitacora
 // CargaIndividual ya jala
-void Bitacora::CargaIndividual(vector<string> registro) {
+void Bitacora::cargaIndividual(vector<string> registro) {
     for (int i = 0; i < registro.size(); i++) {
         bitacora[i].push_back(registro[i]);
     }
@@ -55,7 +66,7 @@ void Bitacora::CargaIndividual(vector<string> registro) {
 
 // Carga varios registros desde un archivo
 // CargaLotes ya jala
-void Bitacora::CargaLotes(string nombreArchivo) {
+void Bitacora::cargaLotes(string nombreArchivo) {
     ifstream archivo(nombreArchivo);
     if (archivo.is_open()) {
         string linea;
@@ -68,14 +79,14 @@ void Bitacora::CargaLotes(string nombreArchivo) {
             getline(ss, razon);
             razon.erase(0, 1);
             vector<string> reg = {mes, dia, hora, ip, razon};
-            CargaIndividual(reg);
+            cargaIndividual(reg);
         }
     }
     archivo.close();
 }
 
 // TODO Ordena la Bitacora por un campo clave
-void Bitacora::Ordena(string nombreOrdenamiento) {
+void Bitacora::ordena(string nombreOrdenamiento) {
     bitacora_ordenada = bitacora;
     // Convertir vector de campo clave a int
     vector<int> bitacora_temp;
@@ -107,7 +118,7 @@ void Bitacora::Ordena(string nombreOrdenamiento) {
 // TODO Consulta registros en la Bitacora dentro de un rango
 // Debuggear el casting de string a int del campo clave de los registros de
 // bitacora ordenada
-vector<vector<string>> Bitacora::Consulta(string desde, string hasta) {
+vector<vector<string>> Bitacora::consulta(string desde, string hasta) {
     vector<vector<string>> resultados;
     int index_desde = busquedaBinaria(stoi(desde), true);
     int index_hasta = busquedaBinaria(stoi(hasta), false);
@@ -181,4 +192,4 @@ int Bitacora::busquedaBinaria(int val, bool encontrarPrimero) {
 }
 
 // Limpia la Biticora
-void Bitacora::Limpiar() { bitacora.clear(); }
+void Bitacora::limpiar() { bitacora.clear(); }
