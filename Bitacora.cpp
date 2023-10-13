@@ -179,13 +179,13 @@ vector<evento> Bitacora::consulta(string desde, string hasta) {
  * @return El indice donde se coloca el elemento pivote despues de la particion.
  */
 int Bitacora::partition(vector<evento>& arr, int start, int end) {
-    int pivotElement = stoi(arr[campo_clave_index][end]);
+    int pivotElement = stoi(arr[end][campo_clave_index]);
     evento pivotevento = arr[end];
     int pivotIndex;
     vector<evento> temp;  // vector<int> temp
 
     for (int i = start; i <= end; i++) {
-        if (stoi(arr[campo_clave_index][i]) <
+        if (stoi(arr[i][campo_clave_index]) <
             pivotElement) {  // arr[i] < pivotElement
             temp.push_back(arr[i]);
         }
