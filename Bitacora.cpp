@@ -30,7 +30,7 @@ void showConsultaResult(vector<evento> consultaRes) {
 
 void showVectorStr(const evento vec) {
     for (const string str : vec) {
-        cout << str << " " << endl;
+        cout << str << " " <<  endl;
     }
 }
 
@@ -86,16 +86,22 @@ void Bitacora::cargaLotes(string nombreArchivo) {
             while (ss >> campo_especifico) {
                 reg.push_back(campo_especifico);
             }
-            if (!ss.eof()) {
-                string campo_especifico_espacios;
-                getline(ss, campo_especifico_espacios);
-                reg.push_back(campo_especifico_espacios);
-            }
-            cargaIndividual(reg);
+    		if (campos.size() < reg.size()) {
+        		stringstream ss;
+        		for (int i = campos.size(); i < reg.size(); ++i) {
+            		ss << reg[i];
+            		if (i < reg.size() - 1) {
+                		ss << " ";
+            		}
+        		}
+        		reg.resize(campos.size());
+        		reg.push_back(ss.str());
+            	showVectorStr(reg);
+            	cargaIndividual(reg);
         }
         archivo.close();
-    }
-    cout << "Se cargo todo perfectamente" << endl;
+    	}
+	}
 }
 
 /**
