@@ -30,7 +30,7 @@ void showConsultaResult(vector<evento> consultaRes) {
 
 void showVectorStr(const evento vec) {
     for (const string str : vec) {
-        cout << str << " " <<  endl;
+        cout << str << " " << endl;
     }
 }
 
@@ -50,7 +50,6 @@ Bitacora::Bitacora(evento campos, string campo_clave) {
         }
     }
     // bitacora.resize(campos.size());
-    cout << "Se creo la bitacora correctamente" << endl;
 }
 
 // Destructor de Bitacora
@@ -86,22 +85,22 @@ void Bitacora::cargaLotes(string nombreArchivo) {
             while (ss >> campo_especifico) {
                 reg.push_back(campo_especifico);
             }
-    		if (campos.size() < reg.size()) {
-        		stringstream ss;
-        		for (int i = campos.size(); i < reg.size(); ++i) {
-            		ss << reg[i];
-            		if (i < reg.size() - 1) {
-                		ss << " ";
-            		}
-        		}
-        		reg.resize(campos.size());
-        		reg.push_back(ss.str());
-            	showVectorStr(reg);
-            	cargaIndividual(reg);
+            if (campos.size() < reg.size()) {
+                stringstream ss;
+                for (int i = campos.size(); i < reg.size(); ++i) {
+                    ss << reg[i];
+                    if (i < reg.size() - 1) {
+                        ss << " ";
+                    }
+                }
+                reg.resize(campos.size());
+                reg.push_back(ss.str());
+                showVectorStr(reg);
+                cargaIndividual(reg);
+            }
+            archivo.close();
         }
-        archivo.close();
-    	}
-	}
+    }
 }
 
 /**
@@ -115,24 +114,14 @@ void Bitacora::cargaLotes(string nombreArchivo) {
  * destino. La Bitacora ordenada se guarda en el archivo especificado si la
  * operación es exitosa.
  */
-// TODO Ordena la Bitacora por un campo clave
+
 bool Bitacora::ordena(string nombreOrdenamiento) {
     bitacora_ordenada = bitacora;
-    // Convertir vector de campo clave a int
-    vector<int> bitacora_temp;
-    /*
-    transform(bitacora[campo_clave_index].begin(),
-              bitacora[campo_clave_index].end(),
-              back_inserter(bitacora_ordenada[campo_clave_index]),
-              [](const string& str) { return stoi(str); });
-    */
 
-    // Ordenar la bitacora
-    cout << "Se inicia el ordenamiento" << endl;
     quickSort(bitacora_ordenada, 0, bitacora_ordenada.size() - 1);
     showConsultaResult(bitacora_ordenada);
 
-    // Insertar los valores de la bitacora ya ordenada en el archivo de
+    // TODO Insertar los valores de la bitacora ya ordenada en el archivo de
     // texto
     /*
     ofstream paraInsertar(nombreOrdenamiento);
@@ -188,21 +177,19 @@ int Bitacora::partition(vector<evento>& arr, int start, int end) {
     int pivotElement = stoi(arr[end][campo_clave_index]);
     evento pivotevento = arr[end];
     int pivotIndex;
-    vector<evento> temp;  // vector<int> temp
+    vector<evento> temp;
 
     for (int i = start; i <= end; i++) {
-        if (stoi(arr[i][campo_clave_index]) <
-            pivotElement) {  // arr[i] < pivotElement
+        if (stoi(arr[i][campo_clave_index]) < pivotElement) {
             temp.push_back(arr[i]);
         }
     }
 
     pivotIndex = temp.size();
-    temp.push_back(pivotevento);  // temp.push_back(pivotElement)
+    temp.push_back(pivotevento);
 
     for (int i = start; i <= end; i++) {
-        if (stoi(arr[campo_clave_index][i]) >=
-            pivotElement) {  // arr[i] >= pivotElement
+        if (stoi(arr[i][campo_clave_index]) >= pivotElement) {
             temp.push_back(arr[i]);
         }
     }
