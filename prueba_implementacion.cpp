@@ -125,7 +125,9 @@ int main() {
 				cin>>desde;
 				cout<<"Indique el dia final de la consulta: ";
 				cin>>hasta;
-				if(desde>=hasta){
+				int desde_num = stoi(desde);
+        		int hasta_num = stoi(hasta);
+				if(desde_num >= hasta_num){
 		            cout<<"El dia inicial debe ser menor al dia final"<<endl;
 		        } else{
 					B.cargaLotes("ordenamiento.txt");
