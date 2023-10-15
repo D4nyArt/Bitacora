@@ -89,7 +89,7 @@ void Bitacora::cargaLotes(string nombreArchivo) {
                 }
             }
 
-            // Leer el último campo (razón de la falla) que puede contener espacios
+            // Leer el ï¿½ltimo campo (razï¿½n de la falla) que puede contener espacios
             getline(ss, reg[campos.size() - 1]);
             reg[campos.size() - 1].erase(0,1);
             bitacora.push_back(reg);
@@ -115,7 +115,25 @@ bool Bitacora::ordena(string nombreOrdenamiento) {
     bitacora_ordenada = bitacora;
 
     quickSort(bitacora_ordenada, 0, bitacora_ordenada.size() - 1);
-    showConsultaResult(bitacora_ordenada);
+
+    ofstream archivo(nombreOrdenamiento);
+
+    
+    if (archivo.is_open()) {
+        for (evento reg : bitacora_ordenada) {
+            for (string campo : reg) {
+                archivo << campo << " ";
+            }
+            archivo << endl; // Agrega un salto de lÃ­nea despuÃ©s de cada vector<string>
+        }
+
+        archivo.close();
+        cout << "Datos escritos en el archivo salida.txt." << endl;
+        return true;
+    } else {
+        cerr << "Error al abrir el archivo." << endl;
+        return false;
+    }
 
     // TODO Insertar los valores de la bitacora ya ordenada en el archivo de
     // texto
