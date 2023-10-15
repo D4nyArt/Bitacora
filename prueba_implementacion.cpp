@@ -121,13 +121,17 @@ int main() {
             } else if(!bitacora_ordenada){
                 cout<<"La bitacora no ha sido ordenada todavia"<<endl;
             } else{
-					cout<<"Indique el dia inicial de la consulta: ";
-					cin>>desde;
-					cout<<"Indique el dia final de la consulta: ";
-					cin>>hasta;
+				cout<<"Indique el dia inicial de la consulta: ";
+				cin>>desde;
+				cout<<"Indique el dia final de la consulta: ";
+				cin>>hasta;
+				if(desde>=hasta){
+		            cout<<"El dia inicial debe ser menor al dia final"<<endl;
+		        } else{
 					B.cargaLotes("ordenamiento.txt");
-					B.consulta(desde, hasta);
+					registros=B.consulta(desde, hasta);
 					showConsultaResult(registros);
+				}
 			}
 			break;
 		case 6:
