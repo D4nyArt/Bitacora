@@ -30,8 +30,9 @@ void showConsultaResult(vector<evento> consultaRes) {
 
 void showVectorStr(const evento vec) {
     for (const string str : vec) {
-        cout << str << " " << endl;
+        cout << str << " ";
     }
+    cout << endl;
 }
 
 void showVectorInt(const vector<int> vec) {
@@ -81,27 +82,24 @@ void Bitacora::cargaLotes(string nombreArchivo) {
         while (getline(archivo, linea)) {
             istringstream ss(linea);
             evento reg(campos.size());
-            string campo_especifico;
-            while (ss >> campo_especifico) {
-                reg.push_back(campo_especifico);
-            }
-            if (campos.size() < reg.size()) {
-                stringstream ss;
-                for (int i = campos.size(); i < reg.size(); ++i) {
-                    ss << reg[i];
-                    if (i < reg.size() - 1) {
-                        ss << " ";
-                    }
+
+            // Leer los primeros campos
+            for (int i = 0; i < campos.size() - 1; ++i) {
+                if (!(ss >> reg[i])) {
+                    cerr << "Error al leer el archivo: " << nombreArchivo << endl;
+                    return;
                 }
-                reg.resize(campos.size());
-                reg.push_back(ss.str());
-                showVectorStr(reg);
-                cargaIndividual(reg);
             }
-            archivo.close();
+
+            // Leer el último campo (razón de la falla) que puede contener espacios
+            getline(ss, reg[campos.size() - 1]);
+            reg[campos.size() - 1].erase(0,1);
+            bitacora.push_back(reg);
         }
+        archivo.close();
     }
 }
+
 
 /**
  * Ordena la Bitacora segun un campo clave y guarda los registros en un archivo
