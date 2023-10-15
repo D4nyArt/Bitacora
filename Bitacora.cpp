@@ -2,8 +2,8 @@
  * consta de los metodos: cargaIndividual, cargaLotes, ordena, consulta y
  * limpia*/
 
-// Creado el 5 de Octubre del 2023
-// Editado ----------------------
+// Creado el 25 de septiembre del 2023
+// Editado el 15 de octubre del 2023
 
 // Esteban Leal Menendez | A01369877
 // Stephanie Ortega Espinosa | A01369902
@@ -19,35 +19,13 @@
 
 using namespace std;
 
-void showConsultaResult(vector<evento> consultaRes) {
-    for (int i = 0; i < consultaRes.size(); i++) {
-        for (int j = 0; j < consultaRes[i].size(); j++) {
-            cout << consultaRes[i][j] << " ";
-        }
-        cout << endl;
-    }
-}
-
-void showVectorStr(const evento vec) {
-    for (const string str : vec) {
-        cout << str << " ";
-    }
-    cout << endl;
-}
-
-void showVectorInt(const vector<int> vec) {
-    for (const int num : vec) {
-        cout << num << " ";
-    }
-}
-
 // Constructor para crear una Bitacora vacia
-Bitacora::Bitacora(evento campos, string campo_clave) {
-    this->campo_clave = campo_clave;
+Bitacora::Bitacora(evento campos, string campoClave) {
+    this->campoClave = campoClave;
     this->campos = campos;
     for (int i = 0; i < campos.size() - 1; i++) {
-        if (campos[i] == campo_clave) {
-            campo_clave_index = i;
+        if (campos[i] == campoClave) {
+            campoClaveIndex = i;
         }
     }
     // bitacora.resize(campos.size());
@@ -84,20 +62,21 @@ void Bitacora::cargaLotes(string nombreArchivo) {
             // Leer los primeros campos
             for (int i = 0; i < campos.size() - 1; ++i) {
                 if (!(ss >> reg[i])) {
-                    cerr << "Error al leer el archivo: " << nombreArchivo << endl;
+                    cerr << "Error al leer el archivo: " << nombreArchivo
+                         << endl;
                     return;
                 }
             }
 
-            // Leer el �ltimo campo (raz�n de la falla) que puede contener espacios
+            // Leer el �ltimo campo (raz�n de la falla) que puede contener
+            // espacios
             getline(ss, reg[campos.size() - 1]);
-            reg[campos.size() - 1].erase(0,1);
+            reg[campos.size() - 1].erase(0, 1);
             bitacora.push_back(reg);
         }
         archivo.close();
     }
 }
-
 
 /**
  * Ordena la Bitacora segun un campo clave y guarda los registros en un archivo
@@ -112,19 +91,19 @@ void Bitacora::cargaLotes(string nombreArchivo) {
  */
 
 bool Bitacora::ordena(string nombreOrdenamiento) {
-    bitacora_ordenada = bitacora;
+    bitacoraOrdenada = bitacora;
 
-    quickSort(bitacora_ordenada, 0, bitacora_ordenada.size() - 1);
+    quickSort(bitacoraOrdenada, 0, bitacoraOrdenada.size() - 1);
 
     ofstream archivo(nombreOrdenamiento);
 
-    
     if (archivo.is_open()) {
-        for (evento reg : bitacora_ordenada) {
+        for (evento reg : bitacoraOrdenada) {
             for (string campo : reg) {
                 archivo << campo << " ";
             }
-            archivo << endl; // Agrega un salto de línea después de cada vector<string>
+            archivo << endl;  // Agrega un salto de línea después de cada
+                              // evento
         }
 
         archivo.close();
@@ -134,24 +113,6 @@ bool Bitacora::ordena(string nombreOrdenamiento) {
         cerr << "Error al abrir el archivo." << endl;
         return false;
     }
-
-    // TODO Insertar los valores de la bitacora ya ordenada en el archivo de
-    // texto
-    /*
-    ofstream paraInsertar(nombreOrdenamiento);
-    if (paraInsertar.is_open()) {
-        int j = campos.size();
-        for (int i = 0; i < bitacora_ordenada.size() - 1; i++) {
-            for (int j = 0; j < campos.size() - 1; j++) {
-                paraInsertar << bitacora_ordenada[i][j] << " ";
-            }
-            paraInsertar << endl;
-        }
-        return true;
-    } else {
-        return false;
-    }
-    */
 }
 
 /**
@@ -173,7 +134,7 @@ vector<evento> Bitacora::consulta(string desde, string hasta) {
     int index_hasta = busquedaBinaria(stoi(hasta), false);
 
     for (int i = index_desde; i <= index_hasta; i++) {
-        resultados.push_back(bitacora_ordenada[i]);
+        resultados.push_back(bitacoraOrdenada[i]);
     }
     return resultados;
 }
@@ -188,13 +149,13 @@ vector<evento> Bitacora::consulta(string desde, string hasta) {
  * @return El indice donde se coloca el elemento pivote despues de la particion.
  */
 int Bitacora::partition(vector<evento>& arr, int start, int end) {
-    int pivotElement = stoi(arr[end][campo_clave_index]);
+    int pivotElement = stoi(arr[end][campoClaveIndex]);
     evento pivotevento = arr[end];
     int pivotIndex;
     vector<evento> temp;
 
     for (int i = start; i <= end; i++) {
-        if (stoi(arr[i][campo_clave_index]) < pivotElement) {
+        if (stoi(arr[i][campoClaveIndex]) < pivotElement) {
             temp.push_back(arr[i]);
         }
     }
@@ -203,7 +164,7 @@ int Bitacora::partition(vector<evento>& arr, int start, int end) {
     temp.push_back(pivotevento);
 
     for (int i = start; i <= end; i++) {
-        if (stoi(arr[i][campo_clave_index]) >= pivotElement) {
+        if (stoi(arr[i][campoClaveIndex]) >= pivotElement) {
             temp.push_back(arr[i]);
         }
     }
@@ -249,12 +210,12 @@ void Bitacora::quickSort(vector<evento>& arr, int start, int end) {
  */
 int Bitacora::busquedaBinaria(int val, bool encontrarPrimero) {
     int inicio = 0;
-    int fin = bitacora_ordenada.size() - 1;
+    int fin = bitacoraOrdenada.size() - 1;
     int resultado = -1;
 
     while (inicio <= fin) {
         int medio = inicio + (fin - inicio) / 2;
-        int valorMedio = stoi(bitacora_ordenada[medio][campo_clave_index]);
+        int valorMedio = stoi(bitacoraOrdenada[medio][campoClaveIndex]);
 
         if (valorMedio == val) {
             resultado = medio;

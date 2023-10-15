@@ -9,7 +9,7 @@ typedef vector<string> evento;
 class Bitacora {
    public:
     // Constructor para crear una Bitacora vacia
-    Bitacora(evento campos, string campo_clave);
+    Bitacora(evento campos, string campoClave);
 
     // Destructor de Bitacora
     ~Bitacora();
@@ -35,9 +35,9 @@ class Bitacora {
     void quickSort(vector<evento>& arr, int start, int end);
     int busquedaBinaria(int val, bool encontrarPrimero);
 
-    string campo_clave;
-    int campo_clave_index;
+    string campoClave;
+    int campoClaveIndex;
     evento campos;
     vector<evento> bitacora;
-    vector<evento> bitacora_ordenada;
+    vector<evento> bitacoraOrdenada;
 };
