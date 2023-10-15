@@ -64,9 +64,7 @@ Bitacora::~Bitacora(){};
  * del registro.
  */
 void Bitacora::cargaIndividual(evento registro) {
-    for (int i = 0; i < registro.size(); i++) {
-        bitacora.push_back(registro);
-    }
+    bitacora.push_back(registro);
 }
 
 /**
