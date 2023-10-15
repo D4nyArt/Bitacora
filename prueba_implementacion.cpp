@@ -81,6 +81,7 @@ int main() {
 				getline(cin, registro[4]);
 				B.cargaIndividual(registro);
 				bitacora_limpia=false;
+				bitacora_ordenada=false;
 				cout<<"Carga individual exitosa"<<endl;
 			}
 			break;
@@ -93,6 +94,7 @@ int main() {
 				cin>>nomArchivo;
 		        B.cargaLotes(nomArchivo);
 		        bitacora_limpia=false;
+		        bitacora_ordenada=false;
 	        	cout<<"Lote cargado"<<endl;
 			    }
 	    	break;
@@ -101,6 +103,8 @@ int main() {
                 cout<<"La bitacora no ha sido creada todavia"<<endl;
             } else if(bitacora_limpia){
                 cout<<"No hay registros para ordenar"<<endl;
+            } else if(bitacora_ordenada){
+                cout<<"La bitacora ya esta ordenada"<<endl;
             } else{
             	cout<<"Ingrese el nombre del archivo donde se guardara el ordenamiento: ";
 				cin>>nomArchivo;
