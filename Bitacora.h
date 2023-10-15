@@ -1,3 +1,6 @@
+#ifndef BITACORA_H
+#define ADD_H
+
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -41,3 +44,5 @@ class Bitacora {
     vector<evento> bitacora;
     vector<evento> bitacoraOrdenada;
 };
+
+#endif
