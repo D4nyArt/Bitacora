@@ -49,7 +49,8 @@ int main() {
 				cout<<"Indica el mes (coloca las primeras 3 letras en minuscula): ";
 				cin.ignore();
 				cin>>registro[0];
-				while(registro[0].size()!=3 || (registro[0] != "ene" && registro[0] != "feb" && registro[0] != "mar" && registro[0] != "abr" && registro[0] != "may" && registro[0] != "jun" && registro[0] != "jul" && registro[0] != "ago" && registro[0] != "sep" && registro[0] != "oct" && registro[0] != "nov" && registro[0] != "dic")){
+				regex regexFecha("^(ene|feb|mar|abr|may|jun|jul|ago|sep|oct|nov|dic)$");
+				while(!regex_match(registro[0], regexFecha)){
 			        cout<<"El mes debe tener exactamente 3 letras en minuscula. Ingrese nuevamente: ";
 			        cin.ignore();
 			        cin>>registro[0];
@@ -67,9 +68,9 @@ int main() {
 			        cin.ignore();
 			        cin>>registro[2];
 			    }
-				cout<<"Indica la direccion IP (en formato xxx.xx.xxx.xx:xxxx): ";
+				cout<<"Indica la direccion IP (en formato 1-3 digitos.1-2 digitos.1-3 digitos.1-2 digitos:xxxx): ";
 				cin>>registro[3];
-				regex regexIP("^(\\d{3}\\.\\d{2}\\.\\d{3}\\.\\d{2}):(\\d{4})$");
+				regex regexIP("^(\\d{1,3}\\.\\d{1,2}\\.\\d{1,3}\\.\\d{1,2}):(\\d{4})$");
 			    while (!regex_match(registro[3], regexIP)) {
 			        cout << "Asegurese de cumplir con el formato de la direccion IP e ingrese nuevamente: ";
 			        cin.ignore();
