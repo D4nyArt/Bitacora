@@ -5,7 +5,7 @@
 // Creado el 5 de Octubre del 2023
 // Editado ----------------------
 
-// Esteban Leal Menéndez | A01369877
+// Esteban Leal Menendez | A01369877
 // Stephanie Ortega Espinosa | A01369902
 // Daniel Arteaga Mercado | A01369706
 
@@ -71,7 +71,7 @@ void Bitacora::cargaIndividual(evento registro) {
 /**
  * Carga varios registros desde un archivo de texto.
  *
- * @param nombreArchivo El nombre del archivo desde el cual se cargarán los
+ * @param nombreArchivo El nombre del archivo desde el cual se cargaran los
  * registros. Debe estar en un formato compatible con los campos de la bitacora.
  */
 void Bitacora::cargaLotes(string nombreArchivo) {
@@ -108,11 +108,11 @@ void Bitacora::cargaLotes(string nombreArchivo) {
  * de texto.
  *
  * @param nombreOrdenamiento El nombre del archivo de texto en el que se
- * guardarán los registros ordenados.
+ * guardaran los registros ordenados.
  * @return Devuelve un valor booleano, true si la operacion de ordenamiento y
  * guardado fue exitosa, o false en caso de que no se pueda abrir el archivo de
  * destino. La Bitacora ordenada se guarda en el archivo especificado si la
- * operación es exitosa.
+ * operacion es exitosa.
  */
 
 bool Bitacora::ordena(string nombreOrdenamiento) {
@@ -165,7 +165,7 @@ vector<evento> Bitacora::consulta(string desde, string hasta) {
 }
 
 /**
- * Realiza la partición de un arreglo en el contexto de un algoritmo de
+ * Realiza la particion de un arreglo en el contexto de un algoritmo de
  * ordenamiento QuickSort.
  *
  * @param arr Un vector de enteros que se va a particionar.
@@ -224,7 +224,7 @@ void Bitacora::quickSort(vector<evento>& arr, int start, int end) {
  *
  * @param val El valor que se desea buscar en la bitacora.
  * @param encontrarPrimero Un valor booleano que determina si se busca el primer
- * índice donde se encuentra el valor (true) o el último índice (false) en caso
+ * Indice donde se encuentra el valor (true) o el ultimo indice (false) en caso
  * de valores duplicados.
  * @return El indice en la bitacora donde se encuentra el valor buscado. Si no
  * se encuentra, se devuelve -1. Si se especifica buscar el primer indice y no
@@ -245,9 +245,9 @@ int Bitacora::busquedaBinaria(int val, bool encontrarPrimero) {
         if (valorMedio == val) {
             resultado = medio;
             if (encontrarPrimero) {
-                fin = medio - 1;  // Buscar el primer índice hacia la izquierda
+                fin = medio - 1;
             } else {
-                inicio = medio + 1;  // Buscar el último índice hacia la derecha
+                inicio = medio + 1;
             }
         } else if (valorMedio < val) {
             inicio = medio + 1;
@@ -260,6 +260,6 @@ int Bitacora::busquedaBinaria(int val, bool encontrarPrimero) {
 }
 
 /**
- * Limpia la Bitácora, eliminando todos los registros almacenados en ella.
+ * Limpia la Bitacora, eliminando todos los registros almacenados en ella.
  */
 void Bitacora::limpiar() { bitacora.clear(); }
