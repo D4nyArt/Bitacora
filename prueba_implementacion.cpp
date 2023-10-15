@@ -121,8 +121,8 @@ int main() {
 	            	vector<string> registro(5);
 					cout<<"Ingrese el nombre del archivo con los registros a cargar: ";
 					cin>>nomArchivo;
-					ifstream archivoExiste(nomArchivo.c_str());
-			        if(!archivoExiste){
+					ifstream existeArchivo(nomArchivo.c_str());
+			        if(!existeArchivo){
 			            cout<<"El archivo no existe o no esta en la misma "
 						"ubicacion que este programa"<<endl;
 			        } else {
