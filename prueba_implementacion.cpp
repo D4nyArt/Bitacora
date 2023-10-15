@@ -98,11 +98,12 @@ int main() {
 		case 4:
 			if(!bitacora_creada){
                 cout<<"La bitacora no ha sido creada todavia"<<endl;
-            } 
-			if(bitacora_limpia){
+            } else if(bitacora_limpia){
                 cout<<"No hay registros para ordenar"<<endl;
             } else{
-				B.ordena("ordenamiento.txt");
+            	cout<<"Ingrese el nombre del archivo donde se guardara el ordenamiento: ";
+				cin>>nomArchivo;
+				B.ordena(nomArchivo);
 				bitacora_ordenada=true;
 				cout<<"Ordenamiento exitoso"<<endl;
 			}
@@ -127,7 +128,9 @@ int main() {
 		case 6:
 			if(!bitacora_creada){
                 cout<<"La bitacora no ha sido creada todavia"<<endl;
-            } else{
+            } else if(bitacora_limpia){
+                cout<<"No hay registros para limpiar"<<endl;
+            } else {
 				B.limpiar();
 				bitacora_limpia=true;
 				cout<<"Bitacora limpia :)"<<endl;
