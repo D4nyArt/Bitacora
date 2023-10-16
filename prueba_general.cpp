@@ -7,6 +7,12 @@
 
 using namespace std;
 
+/**
+ * Funcion para imprimir el resultado de una consulta en la consola.
+ * Complejidad O(n^2)
+ *
+ * @param consultaRes es un vector de eventos que regresada por la funcion consulta 
+ */
 void showConsultaResult(vector<evento> consultaRes) {
     for (int i = 0; i < consultaRes.size(); i++) {
         for (int j = 0; j < consultaRes[i].size(); j++) {
