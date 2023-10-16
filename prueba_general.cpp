@@ -7,17 +7,13 @@
 
 using namespace std;
 
-<<<<<<< Updated upstream
 /**
  * Funcion para imprimir el resultado de una consulta en la consola.
  * Complejidad O(n^2)
  *
  * @param consultaRes es un vector de eventos que regresada por la funcion consulta 
  */
-=======
 
-//
->>>>>>> Stashed changes
 void showConsultaResult(vector<evento> consultaRes) {
     for (int i = 0; i < consultaRes.size(); i++) {
         for (int j = 0; j < consultaRes[i].size(); j++) {
@@ -57,7 +53,7 @@ int main(){
         cout<<"Indica el nombre del campo clave: ";
         cin>>campo_clave;
         bitacoraPtr = new Bitacora(campos, campo_clave);
-		cout<<"La bitacora sido creada"<<endl;
+		cout<<"La bitacora ha sido creada"<<endl;
 		continue;
     }else if (choice == 2) {
     	if (bitacoraPtr == nullptr) {

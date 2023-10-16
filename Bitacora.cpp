@@ -290,5 +290,4 @@ void Bitacora::limpiar() {
     }
     bitacora.clear();
 	bitacoraOrdenada.clear();
-	cout<<"Bitacora limpia"<<endl;
 }
