@@ -1,0 +1,8 @@
+Juan 15 Toluca Mexico
+Emma 41 Frankfurt Alemania
+Aleksander 17 Moscu Russia
+Fernando 30 Madrid Espana 
+Oscar 7 Lima Peru 
+Leonardo 35 Misiones Argentina
+Patrick 26 Amsterdam Paises Bajos
+Carlos 22 Washington Estados Unidos

@@ -156,11 +156,11 @@ vector<evento> Bitacora::consulta(string desde, string hasta) {
     int hastaNum = stoi(hasta);
 
     if(bitacora.size() == 0){
-        cout << "No hay registros para consultar" << endl;
+        cerr << "Error, no hay registros para consultar" << endl;
     }else if(bitacoraOrdenada.size() == 0){
-        cout << "La bitacora no ha sido ordenada todavia" << endl;
+        cout << "Error, la bitacora no ha sido ordenada todavia" << endl;
     }else if(desdeNum > hastaNum){
-		    cout<<"El dia inicial debe ser menor o igual al dia final"<<endl;
+		    cerr<<"Error, el dia inicial debe ser menor o igual al dia final"<<endl;
 	} 
 
     int indexDesde = busquedaBinaria(desdeNum, true);
@@ -286,7 +286,7 @@ int Bitacora::busquedaBinaria(int val, bool encontrarPrimero) {
  */
 void Bitacora::limpiar() { 
     if (bitacora.size() == 0) {
-        cout << "No hay registros para limpiar" << endl;
+        cerr << "Error, no hay registros para limpiar" << endl;
     }
     bitacora.clear();
 	bitacoraOrdenada.clear();
