@@ -148,9 +148,17 @@ bool Bitacora::ordena(string nombreOrdenamiento) {
  * campos representados por cadenas de texto.
  */
 vector<evento> Bitacora::consulta(string desde, string hasta) {
-    vector<evento> resultados;
+	vector<evento> resultados;
     int desdeNum = stoi(desde);
     int hastaNum = stoi(hasta);
+
+    if(bitacora.size() == 0){
+        cout << "No hay registros para consultar" << endl;
+    }else if(bitacoraOrdenada.size() == 0){
+        cout << "La bitacora no ha sido ordenada todavia" << endl;
+    }else if(desdeNum > hastaNum){
+		    cout<<"El dia inicial debe ser menor o igual al dia final"<<endl;
+	} 
 
     int indexDesde = busquedaBinaria(desdeNum, true);
     int indexHasta = busquedaBinaria(hastaNum, false);
@@ -273,4 +281,9 @@ int Bitacora::busquedaBinaria(int val, bool encontrarPrimero) {
  * Limpia la Bitacora, eliminando todos los registros almacenados en ella.
  * Complejidad O(1)
  */
-void Bitacora::limpiar() { bitacora.clear(); }
+void Bitacora::limpiar() { 
+    if (bitacora.size() == 0) {
+        cout << "No hay registros para limpiar" << endl;
+    }
+    bitacora.clear(); 
+}
