@@ -288,6 +288,7 @@ void Bitacora::limpiar() {
     if (bitacora.size() == 0) {
         cerr << "Error, no hay registros para limpiar" << endl;
     }
+
     bitacora.clear();
 	bitacoraOrdenada.clear();
 	cout<<"Bitacora limpia"<<endl;
