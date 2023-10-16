@@ -168,6 +168,9 @@ int main() {
                     } else {
                         B.cargaLotes("ordenamiento.txt");
                         registros = B.consulta(desde, hasta);
+                        if(registros.size()==0){
+                        	cout<<"No se encontraron registros"<<endl;
+						}
                         showConsultaResult(registros);
                     }
                 }
