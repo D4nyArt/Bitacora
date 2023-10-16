@@ -130,8 +130,21 @@ bool Bitacora::ordena(string nombreOrdenamiento) {
  */
 vector<evento> Bitacora::consulta(string desde, string hasta) {
     vector<evento> resultados;
-    int indexDesde = busquedaBinaria(stoi(desde), true);
-    int indexHasta = busquedaBinaria(stoi(hasta), false);
+    int desdeNum = stoi(desde);
+    int hastaNum = stoi(hasta);
+
+    int indexDesde = busquedaBinaria(desdeNum, true);
+    int indexHasta = busquedaBinaria(hastaNum, false);
+
+    if(indexDesde == -1 || indexHasta == -1){
+        for (evento registro: bitacoraOrdenada) {
+            int valor = stoi(registro[campoClaveIndex]);
+            if (valor >= desdeNum && valor <= hastaNum) {
+                resultados.push_back(registro);
+            }
+        }
+        return resultados;
+    }
 
     for (int i = indexDesde; i <= indexHasta; i++) {
         resultados.push_back(bitacoraOrdenada[i]);
