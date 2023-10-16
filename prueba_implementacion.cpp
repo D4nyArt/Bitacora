@@ -144,8 +144,7 @@ int main() {
                     cout << "Ingrese el nombre del archivo donde se guardara "
                             "el ordenamiento: ";
                     cin >> nomArchivo;
-                    B.ordena(nomArchivo);
-                    bitacoraOrdenada = true;
+                    bitacoraOrdenada = B.ordena(nomArchivo);
                     cout << "Ordenamiento exitoso" << endl;
                 }
                 break;
