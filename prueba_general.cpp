@@ -7,12 +7,17 @@
 
 using namespace std;
 
+<<<<<<< Updated upstream
 /**
  * Funcion para imprimir el resultado de una consulta en la consola.
  * Complejidad O(n^2)
  *
  * @param consultaRes es un vector de eventos que regresada por la funcion consulta 
  */
+=======
+
+//
+>>>>>>> Stashed changes
 void showConsultaResult(vector<evento> consultaRes) {
     for (int i = 0; i < consultaRes.size(); i++) {
         for (int j = 0; j < consultaRes[i].size(); j++) {
@@ -54,18 +59,23 @@ int main(){
         bitacoraPtr = new Bitacora(campos, campo_clave);
 		cout<<"La bitacora sido creada"<<endl;
 		continue;
-    }if(choice== 2){
-		if(bitacoraPtr == nullptr){
-            cout<<"La bitacora no ha sido creada todavia"<<endl;
-        } else{
-            for(int i=0; i<num_campos; i++){
-                cout<<"Indica el "<<campos[i]<<": ";
-                cin>>registro[i];
-            }
-            bitacoraPtr->cargaIndividual(registro);
-		}
-		continue;
-	}if(choice==3){
+    }else if (choice == 2) {
+    	if (bitacoraPtr == nullptr) {
+        	cout << "La bitacora no ha sido creada todavía" << endl;
+    	} else {
+        	for (int i = 0; i < num_campos - 1; i++) {
+            	cout << "Indica el " << campos[i] << ": ";
+            	cin >> registro[i];
+        	}
+
+        cin.ignore();  // Limpiar el buffer del teclado antes de usar getline
+
+        cout << "Indica el " << campos[num_campos - 1] << ": ";
+        getline(cin, registro[num_campos - 1]);
+        bitacoraPtr->cargaIndividual(registro);
+    }
+    continue;
+}if(choice==3){
 		if(bitacoraPtr == nullptr){
             cout<<"La bitacora no ha sido creada todavia"<<endl;
         } else{
