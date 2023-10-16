@@ -1,0 +1,8 @@
+Oscar 7 Lima Peru  
+Juan 15 Toluca Mexico  
+Aleksander 17 Moscu Russia  
+Carlos 22 Washington Estados Unidos 
+Patrick 26 Amsterdam Paises Bajos 
+Fernando 30 Madrid Espana  
+Leonardo 35 Misiones Argentina  
+Emma 41 Frankfurt Alemania  
