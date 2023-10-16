@@ -19,7 +19,17 @@
 
 using namespace std;
 
-// Constructor para crear una Bitacora vacia
+/**
+ * Constructor para crear una instancia de la clase Bitacora vacia.
+ * Complejidad O(n)
+ *
+ * @param campos Un vector de cadenas de texto que representa los nombres de los
+ * campos de la Bitacora.
+ * @param campoClave El nombre del campo que se utilizara como clave para
+ * ordenamiento.
+ * @return Una instancia de la clase Bitacora con los campos y campo clave
+ * especificados, inicializada como una Bitacora vacia.
+ */
 Bitacora::Bitacora(evento campos, string campoClave) {
     this->campoClave = campoClave;
     this->campos = campos;
@@ -28,14 +38,21 @@ Bitacora::Bitacora(evento campos, string campoClave) {
             campoClaveIndex = i;
         }
     }
-    // bitacora.resize(campos.size());
 }
 
-// Destructor de Bitacora
+/**
+ * Destructor de la clase Bitacora.
+ * Complejidad O(1)
+ *
+ * @return El destructor se encarga de
+ * liberar los recursos asociados a una instancia de la clase Bitacora al
+ * finalizar su ciclo de vida.
+ */
 Bitacora::~Bitacora(){};
 
 /**
  * Agrega registros individuales a la bitacora existente.
+ * Complejidad O(1)
  *
  * @param registro Un vector de cadenas de texto que contiene la informacion del
  * registro a agregar. Cada elemento del vector representa un evento especifico
@@ -47,6 +64,7 @@ void Bitacora::cargaIndividual(evento registro) {
 
 /**
  * Carga varios registros desde un archivo de texto.
+ * Complejidad O(n^2)
  *
  * @param nombreArchivo El nombre del archivo desde el cual se cargaran los
  * registros. Debe estar en un formato compatible con los campos de la bitacora.
@@ -81,6 +99,7 @@ void Bitacora::cargaLotes(string nombreArchivo) {
 /**
  * Ordena la Bitacora segun un campo clave y guarda los registros en un archivo
  * de texto.
+ * Complejidad O(n^2)
  *
  * @param nombreOrdenamiento El nombre del archivo de texto en el que se
  * guardaran los registros ordenados.
@@ -102,7 +121,7 @@ bool Bitacora::ordena(string nombreOrdenamiento) {
             for (string campo : reg) {
                 archivo << campo << " ";
             }
-            archivo << endl;  // Agrega un salto de línea después de cada
+            archivo << endl;  // Agrega un salto de linea despues de cada
                               // evento
         }
 
@@ -118,6 +137,7 @@ bool Bitacora::ordena(string nombreOrdenamiento) {
 /**
  * Realiza una consulta en una bitacora previamente ordenada para recuperar
  * registros dentro de un rango de valores.
+ * Complejidad O(n)
  *
  * @param desde Limite inferior del rango de registros
  * a consultar.
@@ -142,6 +162,7 @@ vector<evento> Bitacora::consulta(string desde, string hasta) {
 /**
  * Realiza la particion de un arreglo en el contexto de un algoritmo de
  * ordenamiento QuickSort.
+ * Complejidad O(n)
  *
  * @param arr Un vector de enteros que se va a particionar.
  * @param start Indice de inicio de la particion.
@@ -180,6 +201,7 @@ int Bitacora::partition(vector<evento>& arr, int start, int end) {
 /**
  * Realiza la ordenacion de un vector y ordena una copia de la bitacora
  * utilizando el algoritmo QuickSort.
+ * Complejidad O(n*log(n))
  *
  * @param arr Vector de enteros que se va a ordenar.
  * @param start Indice de inicio de la lista a ordenar.
@@ -196,6 +218,7 @@ void Bitacora::quickSort(vector<evento>& arr, int start, int end) {
 /**
  * Realiza una busqueda binaria en la bitcora ordenada para encontrar un valor
  * especifico.
+ * Complejidad O(log(n))
  *
  * @param val El valor que se desea buscar en la bitacora.
  * @param encontrarPrimero Un valor booleano que determina si se busca el primer
@@ -236,5 +259,6 @@ int Bitacora::busquedaBinaria(int val, bool encontrarPrimero) {
 
 /**
  * Limpia la Bitacora, eliminando todos los registros almacenados en ella.
+ * Complejidad O(1)
  */
 void Bitacora::limpiar() { bitacora.clear(); }
