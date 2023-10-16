@@ -8,15 +8,14 @@
 // Stephanie Ortega Espinosa | A01369902
 // Daniel Arteaga Mercado | A01369706
 
-#include <fstream>
 #include <iostream>
 #include <regex>
 #include <string>
 #include <vector>
+#include <fstream>
 
-#include "Bitacora.h"
-
-// #include "Bitacora.cpp"
+#include "Bitacora.cpp"
+//#include "Bitacora.h"
 
 using namespace std;
 
@@ -116,26 +115,24 @@ int main() {
                 }
                 break;
             case 3:
-                if (!bitacoraCreada) {
-                    cout << "La bitacora no ha sido creada todavia" << endl;
-                } else {
-                    vector<string> registro(5);
-                    cout << "Ingrese el nombre del archivo con los registros a "
-                            "cargar: ";
-                    cin >> nomArchivo;
-                    ifstream existeArchivo(nomArchivo.c_str());
-                    if (!existeArchivo) {
-                        cout << "El archivo no existe o no esta en la misma "
-                                "ubicacion que este programa"
-                             << endl;
-                    } else {
-                        B.cargaLotes(nomArchivo);
-                        bitacoraLimpia = false;
-                        bitacoraOrdenada = false;
-                        cout << "Lote cargado" << endl;
-                    }
-                }
-                break;
+				if(!bitacoraCreada){
+	                cout<<"La bitacora no ha sido creada todavia"<<endl;
+	            } else{
+	            	vector<string> registro(5);
+					cout<<"Ingrese el nombre del archivo con los registros a cargar: ";
+					cin>>nomArchivo;
+					ifstream existeArchivo(nomArchivo.c_str());
+			        if(!existeArchivo){
+			            cout<<"El archivo no existe o no esta en la misma "
+						"ubicacion que este programa"<<endl;
+			        } else {
+				        B.cargaLotes(nomArchivo);
+				        bitacoraLimpia=false;
+				        bitacoraOrdenada=false;
+			        	cout<<"Lote cargado"<<endl;
+				    }
+				}
+		    	break;
             case 4:
                 if (!bitacoraCreada) {
                     cout << "La bitacora no ha sido creada todavia" << endl;
