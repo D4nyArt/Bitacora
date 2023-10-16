@@ -60,6 +60,7 @@ Bitacora::~Bitacora(){};
  */
 void Bitacora::cargaIndividual(evento registro) {
     bitacora.push_back(registro);
+    cout<<"Carga individual exitosa"<<endl;
 }
 
 /**
@@ -93,6 +94,7 @@ void Bitacora::cargaLotes(string nombreArchivo) {
             bitacora.push_back(reg);
         }
         archivo.close();
+        cout<<"Lote cargado"<<endl;
     }
 }
 
@@ -126,6 +128,7 @@ bool Bitacora::ordena(string nombreOrdenamiento) {
         }
 
         archivo.close();
+        cout<<"Ordenamiento exitoso"<<endl;
         return true;
     } else {
         cerr << "Error al abrir el archivo" << endl;
@@ -285,5 +288,8 @@ void Bitacora::limpiar() {
     if (bitacora.size() == 0) {
         cout << "No hay registros para limpiar" << endl;
     }
-    bitacora.clear(); 
+
+    bitacora.clear();
+	bitacoraOrdenada.clear();
+	cout<<"Bitacora limpia"<<endl;
 }
