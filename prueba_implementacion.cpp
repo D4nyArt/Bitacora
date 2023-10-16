@@ -14,7 +14,6 @@
 #include <string>
 #include <vector>
 
-//#include "Bitacora.cpp"
 #include "Bitacora.h"
 
 using namespace std;

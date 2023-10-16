@@ -60,7 +60,7 @@ Bitacora::~Bitacora(){};
  */
 void Bitacora::cargaIndividual(evento registro) {
     bitacora.push_back(registro);
-    cout<<"Carga individual exitosa"<<endl;
+    cout << "Carga individual exitosa" << endl;
 }
 
 /**
@@ -94,7 +94,7 @@ void Bitacora::cargaLotes(string nombreArchivo) {
             bitacora.push_back(reg);
         }
         archivo.close();
-        cout<<"Lote cargado"<<endl;
+        cout << "Lote cargado" << endl;
     }
 }
 
@@ -128,7 +128,7 @@ bool Bitacora::ordena(string nombreOrdenamiento) {
         }
 
         archivo.close();
-        cout<<"Ordenamiento exitoso"<<endl;
+        cout << "Ordenamiento exitoso" << endl;
         return true;
     } else {
         cerr << "Error al abrir el archivo" << endl;
@@ -151,23 +151,24 @@ bool Bitacora::ordena(string nombreOrdenamiento) {
  * campos representados por cadenas de texto.
  */
 vector<evento> Bitacora::consulta(string desde, string hasta) {
-	vector<evento> resultados;
+    vector<evento> resultados;
     int desdeNum = stoi(desde);
     int hastaNum = stoi(hasta);
 
-    if(bitacora.size() == 0){
+    if (bitacora.size() == 0) {
         cerr << "Error, no hay registros para consultar" << endl;
-    }else if(bitacoraOrdenada.size() == 0){
+    } else if (bitacoraOrdenada.size() == 0) {
         cout << "Error, la bitacora no ha sido ordenada todavia" << endl;
-    }else if(desdeNum > hastaNum){
-		    cerr<<"Error, el dia inicial debe ser menor o igual al dia final"<<endl;
-	} 
+    } else if (desdeNum > hastaNum) {
+        cerr << "Error, el dia inicial debe ser menor o igual al dia final"
+             << endl;
+    }
 
     int indexDesde = busquedaBinaria(desdeNum, true);
     int indexHasta = busquedaBinaria(hastaNum, false);
 
-    if(indexDesde == -1 || indexHasta == -1){
-        for (evento registro: bitacoraOrdenada) {
+    if (indexDesde == -1 || indexHasta == -1) {
+        for (evento registro : bitacoraOrdenada) {
             int valor = stoi(registro[campoClaveIndex]);
             if (valor >= desdeNum && valor <= hastaNum) {
                 resultados.push_back(registro);
@@ -284,10 +285,10 @@ int Bitacora::busquedaBinaria(int val, bool encontrarPrimero) {
  * Limpia la Bitacora, eliminando todos los registros almacenados en ella.
  * Complejidad O(1)
  */
-void Bitacora::limpiar() { 
+void Bitacora::limpiar() {
     if (bitacora.size() == 0) {
         cerr << "Error, no hay registros para limpiar" << endl;
     }
     bitacora.clear();
-	bitacoraOrdenada.clear();
+    bitacoraOrdenada.clear();
 }
