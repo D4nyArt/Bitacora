@@ -14,7 +14,7 @@
 #include <string>
 #include <vector>
 
-// #include "Bitacora.cpp"
+//#include "Bitacora.cpp"
 #include "Bitacora.h"
 
 using namespace std;
@@ -93,8 +93,8 @@ int main() {
                         cin >> registro[2];
                     }
                     cout
-                        << "Indica la direccion IP (en formato 1-3 digitos.1-2 "
-                           "digitos.1-3 digitos.1-2 digitos:xxxx): ";
+                        << "Indica la direccion IP (desde formato x.x.x.x:xxxx "
+                           "hasta xxx.xx.xxx.xx:xxxx): ";
                     cin >> registro[3];
                     regex regexIP(
                         "^(\\d{1,3}\\.\\d{1,2}\\.\\d{1,3}\\.\\d{1,2}):(\\d{4})"

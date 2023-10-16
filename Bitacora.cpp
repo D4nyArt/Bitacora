@@ -86,7 +86,7 @@ void Bitacora::cargaLotes(string nombreArchivo) {
                 }
             }
 
-            // Leer el �ltimo campo (raz�n de la falla) que puede contener
+            // Leer el ultimo campo (razon de la falla) que puede contener
             // espacios
             getline(ss, reg[campos.size() - 1]);
             reg[campos.size() - 1].erase(0, 1);
@@ -126,10 +126,9 @@ bool Bitacora::ordena(string nombreOrdenamiento) {
         }
 
         archivo.close();
-        cout << "Datos escritos en el archivo salida.txt." << endl;
         return true;
     } else {
-        cerr << "Error al abrir el archivo." << endl;
+        cerr << "Error al abrir el archivo" << endl;
         return false;
     }
 }
