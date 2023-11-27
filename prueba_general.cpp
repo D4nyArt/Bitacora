@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "Bitacora.h"
-// #include "Bitacora.h"
 
 using namespace std;
 
